@@ -1,18 +1,18 @@
 
 <!-- ========== FOOTER ========== -->
-<footer class="my-0 mx-auto w-full py-10 px-4 sm:px-6 lg:px-8 flex flex-1 justify-center bg-primary">
+<footer class=" bg-primary">
   <!-- Content -->
-  <div class="max-w-5xl grid"> <!--max-w-5xl -->
+  <div class="max-w-5xl mx-auto grid py-5"> <!--max-w-5xl -->
     <!-- Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mx-0 mb-10">
-      <div>
-        <h4 class="text-center text-xs font-semibold text-gray-900">Quienes somos</h4>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:py-5">
+      <div routerLinkActive="active" class="grid justify-center items-center">
+        <a routerLink="/about" class="font-semibold text-gray-900" href="#">Quienes somos</a>
       </div>
-      <div>
-        <h4 class="text-center text-xs font-semibold text-gray-900">Preguntas frecuentes</h4>
+      <div routerLinkActive="active" class="grid justify-center items-center">
+        <a routerLink="/faq"  class="font-semibold text-gray-900" href="#">Preguntas frecuentes</a>
       </div>
-      <div>
-        <h4 class="text-center text-xs font-semibold text-gray-900">Contacto</h4>
+      <div routerLinkActive="active" class="grid justify-center items-center">
+        <a routerLink="/contact" class="font-semibold text-gray-900" href="#">Contacto</a>
       </div>
     </div>
     <!-- End Grid -->

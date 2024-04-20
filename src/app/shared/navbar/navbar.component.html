@@ -1,45 +1,9 @@
-<!-- <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-xl justify-content-end pe-2">
-    
-              <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-    
-              <div class="collapse navbar-collapse pe-3 justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <button class="nav-link active btn rounded-pill bg-light mx-1" type="button">
-                      Servicios
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link active btn rounded-pill bg-light mx-1" type="button">
-                      Mi Proyecto
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link active btn rounded-pill bg-light mx-1" type="button">
-                      Inicia Sesion
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link active btn rounded-circle mx-1 bg-danger" type="button">
-                      Yo
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-</div> -->
-
 
 <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-300 text-sm py-4">
-  <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+  <nav class="max-w-5xl w-full mx-auto sm:flex sm:items-center sm:justify-between" aria-label="Global">
     <div class="flex items-center justify-between">
-      <a class="flex-none bg-primary p-2 rounded-lg" href="#">
-        <img class="w-20 h-auto" src="../assets/images/Logo.svg" alt="Logo">
+      <a class="flex-none absolute top-10 w-fit bg-primary p-2 rounded-lg" href="#">
+        <img class="" src="../assets/images/Logo.svg" alt="Logo">
       </a>
       <div class="sm:hidden">
         <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-image-2" aria-controls="navbar-image-2" aria-label="Toggle navigation">
@@ -49,11 +13,11 @@
       </div>
     </div>
     <div id="navbar-image-2" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-      <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
-        <a class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Servicios</a>
-        <a class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Mi Proyecto</a>
-        <a class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Inicia Sesión</a>
-        <a class="font-medium text-gray-600 hover:text-gray-400 bg-primary-400 p- rounded-full" href="#">M</a>
+      <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5" routerLinkActive="active">
+        <a routerLink="/tools" class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Servicios</a>
+        <a routerLink="/project" class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Mi Proyecto</a>
+        <a routerLink="/login" class="font-medium text-gray-600 hover:text-gray-400 bg-white p-2 rounded-full" href="#">Inicia Sesión</a>
+        <a routerLink="/account" class="font-medium text-gray-600 hover:text-gray-400 bg-primary-400 p-2 rounded-full" href="#">Yo</a>
       </div>
     </div>
   </nav>

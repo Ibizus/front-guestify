@@ -1,12 +1,8 @@
-<h1 class="text-3xl font-bold underline">
-  Hello app!
-</h1>
 
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <app-logo></app-logo>
-  <app-landing></app-landing>
+  <div  class="max-w-5xl mx-auto py-16">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer></app-footer>
 </div>
-
-<router-outlet />
