@@ -9,6 +9,10 @@ import { FaqComponent } from './main/faq/faq.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestsComponent } from './pages/guests/guests.component';
+import { GiftsComponent } from './pages/gifts/gifts.component';
+import { PicturesComponent } from './pages/pictures/pictures.component';
+import { PlanningComponent } from './pages/planning/planning.component';
+import { TodosComponent } from './pages/todos/todos.component';
 
 export const routes: Routes = [
     {path: "home", component: LandingComponent},
@@ -17,7 +21,11 @@ export const routes: Routes = [
     {path: "about", component: AboutComponent},
     {path: "faq", component: FaqComponent},
     {path: "contact", component: ContactComponent},
-    {path: "guests", component: GuestsComponent},
     {path: "dashboard", component: DashboardComponent},
+    {path: "guests", component: GuestsComponent},
+    {path: "gifts", component: GiftsComponent},
+    {path: "pictures", component: PicturesComponent},
+    {path: "planning", component: PlanningComponent},
+    {path: "todos", component: TodosComponent},
     {path: "**", pathMatch: "full", redirectTo: "home"}
 ];
