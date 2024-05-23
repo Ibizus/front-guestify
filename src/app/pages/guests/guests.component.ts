@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DashboardComponent } from "../dashboard/dashboard.component";
 import { TableModule } from 'primeng/table';
-import { Guest } from '../../utils/types';
+import { Guest, Invitation } from '../../utils/types';
 import { GuestService } from '../../services/guest.service';
+import { InvitationService } from '../../services/invitation.service';
 
 @Component({
     selector: 'app-guests',
@@ -15,7 +16,7 @@ import { GuestService } from '../../services/guest.service';
     ]
 })
 export class GuestsComponent {
-    guestsList !: Guest[];
+    guestsList !: Invitation[];
     // Pagination variables with default values:
     first: number = 0;
     rows: number = 10;
@@ -25,19 +26,22 @@ export class GuestsComponent {
     totalRecords: number = 200;
 
     constructor(
-        private guestService: GuestService 
+        private guestService: GuestService,
+        private invitationService: InvitationService
     ){}
 
     ngOnInit() {
-      this.getGuests(this.demandedPage, this.rows, '')
-      // this.guestsList.forEach(guest => {
-        
-      //   console.log(guest);
-      // });
+      this.getInvitations(this.demandedPage, this.rows, '')
+
+      console.log(this.guestsList.length);
+
+      this.guestsList.forEach(element => {  
+        console.log(element);
+      });
     }
 
-    getGuests(page: number, size: number, filter: string) {
-        this.guestService.getGuests(page, size, filter).subscribe({
+    getInvitations(page: number, size: number, filter: string) {
+        this.invitationService.getInvitations(page, size, filter).subscribe({
           next: (data) => {
             this.guestsList = data.invitaciones;
             // Pagination:

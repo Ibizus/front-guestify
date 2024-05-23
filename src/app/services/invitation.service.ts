@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../utils/environment';
 import { Observable, map } from 'rxjs';
-import { Guest } from '../utils/types';
+import { Invitation } from '../utils/types';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuestService {
+export class InvitationService {
 
   constructor(private http: HttpClient) {}
-  
-  getGuests(page: number, size: number, filter: string): Observable<any> {
+
+
+  getInvitations(page: number, size: number, filter: string): Observable<any> {
     return this.http
       .get<any>(
         environment.API_ENDPOINT +
@@ -23,32 +24,32 @@ export class GuestService {
       ));
   }
 
-  getFilteredGuests(filter: string): Observable<any[]> {
+  getFilteredInvitations(filter: string): Observable<any[]> {
     return this.http
       .get<any[]>(environment.API_ENDPOINT + 'invitaciones/', {
         params: { filter: filter },
       })
       .pipe(
         map((response: any) =>
-          response.map((guest: Guest) => guest)
+          response.map((invitation: Invitation) => invitation)
         )
       );
   }
 
-  deleteGuest(id: number): Observable<Guest> {
-    return this.http.delete<Guest>(
+  deleteInvitation(id: number): Observable<Invitation> {
+    return this.http.delete<Invitation>(
       environment.API_ENDPOINT + 'invitaciones/' + id
     );
   }
 
-  modifyGuest(guest: Guest): Observable<Object> {
+  modifyInvitation(invitation: Invitation): Observable<Object> {
     return this.http.put(
-      environment.API_ENDPOINT + 'invitaciones/' + guest.id,
-      guest
+      environment.API_ENDPOINT + 'invitaciones/' + invitation.id,
+      invitation
     );
   }
 
-  createGuest(guest: Guest): Observable<Object> {
-    return this.http.post(environment.API_ENDPOINT + 'guests/', guest);
+  createInvitation(invitation: Invitation): Observable<Object> {
+    return this.http.post(environment.API_ENDPOINT + 'invitations/', invitation);
   }
 }
