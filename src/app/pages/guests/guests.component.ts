@@ -15,23 +15,31 @@ import { GuestService } from '../../services/guest.service';
     ]
 })
 export class GuestsComponent {
-    guests !: Guest[];
+    guestsList !: Guest[];
     // Pagination variables with default values:
-    // first: number = 0;
-    // rows: number = 10;
-    // currentPage: number = 20;
-    // demandedPage: number = 0;
-    // totalPages: number = 20;
-    // totalRecords: number = 200;
+    first: number = 0;
+    rows: number = 10;
+    currentPage: number = 20;
+    demandedPage: number = 0;
+    totalPages: number = 20;
+    totalRecords: number = 200;
 
     constructor(
         private guestService: GuestService 
     ){}
 
+    ngOnInit() {
+      this.getGuests(this.demandedPage, this.rows, '')
+      // this.guestsList.forEach(guest => {
+        
+      //   console.log(guest);
+      // });
+    }
+
     getGuests(page: number, size: number, filter: string) {
         this.guestService.getGuests(page, size, filter).subscribe({
           next: (data) => {
-            this.guests = data.guests;
+            this.guestsList = data.invitaciones;
             // Pagination:
             // this.first = page * size + 1; // Calculate index of first item shown
             // this.rows = size; // Update size input from the request
