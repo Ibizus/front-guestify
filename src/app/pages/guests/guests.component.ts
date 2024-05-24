@@ -26,30 +26,27 @@ export class GuestsComponent {
     totalRecords: number = 200;
 
     constructor(
-        private guestService: GuestService,
         private invitationService: InvitationService
     ){}
 
     ngOnInit() {
       this.getInvitations(this.demandedPage, this.rows, '')
-
-      console.log(this.guestsList.length);
-
-      this.guestsList.forEach(element => {  
-        console.log(element);
-      });
     }
 
     getInvitations(page: number, size: number, filter: string) {
         this.invitationService.getInvitations(page, size, filter).subscribe({
           next: (data) => {
-            this.guestsList = data.invitaciones;
+            this.guestsList = data.invitations;
+            // SEE DETAILS IN CONSOLE
+            console.log(this.guestsList.length);
+            this.guestsList.forEach(element => {  
+              console.log(element);
+            });
             // Pagination:
-            // this.first = page * size + 1; // Calculate index of first item shown
-            // this.rows = size; // Update size input from the request
-            // this.currentPage = data.currentPage + 1; // In back first page is index 0
-            // this.totalRecords = data.totalItems;
-            // this.isLoading = false;
+            this.first = page * size + 1; // Calculate index of first item shown
+            this.rows = size; // Update size input from the request
+            this.currentPage = data.currentPage + 1; // In back first page is index 0
+            this.totalRecords = data.totalItems;
           },
           error: (error) => {console.error(error)},
         });
