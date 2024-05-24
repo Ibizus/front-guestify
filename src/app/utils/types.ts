@@ -87,6 +87,12 @@ interface Wedding {
     gifts: Gift[];
     pictures: Picture[];
 }
+interface Tab {
+    id: number;
+    title: string;
+    content: string;
+    visible: boolean;
+  }
 
 export {
     User,
@@ -98,4 +104,5 @@ export {
     Task,
     Picture,
     Wedding,
+    Tab
 }
