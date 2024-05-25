@@ -5,7 +5,6 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { elementAt } from 'rxjs';
 
 @Component({
     selector: 'app-gifts',
@@ -56,12 +55,9 @@ export class GiftsComponent {
     getGifts(page: number, size: number, filter: string) {
         this.giftService.getGifts(page, size, filter).subscribe({
           next: (data) => {
-            this.giftsList = data.Gifts;
+            this.giftsList = data.gifts;
             // CHECK DATA:
-            console.log(this.giftsList.length)
-            this.giftsList.forEach(element =>{
-                console.log(element);
-            })
+            console.log(data);
             // Pagination:
             this.first = page * size + 1; // Calculate index of first item shown
             this.rows = size; // Update size input from the request

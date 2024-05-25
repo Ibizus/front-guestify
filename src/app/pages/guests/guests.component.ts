@@ -57,10 +57,7 @@ export class GuestsComponent {
           next: (data) => {
             this.guestsList = data.invitations;
             // CHECK DATA:
-            console.log(this.guestsList.length)
-            this.guestsList.forEach(element =>{
-                console.log(element);
-            })
+            console.log(data);
             // Pagination:
             this.first = page * size + 1; // Calculate index of first item shown
             this.rows = size; // Update size input from the request
