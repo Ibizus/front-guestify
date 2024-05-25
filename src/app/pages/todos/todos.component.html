@@ -1,3 +1,45 @@
-<div class="mt-20 w-full aspect-video bg-gray-300 content-center">
-    <p class="text-5xl font-bold text-center">todos works!</p>
+<div class="card mt-24">
+    <p-table 
+    [value]="tasksList" 
+    styleClass="p-datatable-striped p-datatable-sm"
+    sortMode="multiple"
+>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="description" class="header-cell">
+                    <div class="header-content">Description<p-sortIcon field="description"/></div>
+                </th>
+                <th pSortableColumn="deadline" class="header-cell">
+                    <div class="header-content">Deadline<p-sortIcon field="deadline"/></div>
+                </th>
+                <th pSortableColumn="done" class="header-cell">
+                    <div class="header-content">Done<p-sortIcon field="done"/></div>
+                </th>
+                <th [width]="200">
+                    <div class="flex justify-center">
+                      <p-iconField iconPosition="right" class="mr-0">
+                        <p-inputIcon styleClass="pi pi-search"/>
+                          <input 
+                              pInputText 
+                              type="text" 
+                              (input)="onInputChange($event)"
+                              placeholder="Search" 
+                              class="bg-slate-200 p-2 rounded"
+                          />
+                      </p-iconField>
+                    </div>
+                  </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-task>
+            <tr>
+                <td>{{ task.description }}</td>
+                <td>{{ task.deadline }}</td>
+                <td>{{ task.done }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-paginator id="p-dropdown-paginator" (onPageChange)="paginate($event)" [first]="first" [rows]="rows" [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
 </div>
