@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DashboardComponent } from "../dashboard/dashboard.component";
 import { Invitation } from '../../utils/types';
 import { InvitationService } from '../../services/invitation.service';
 import { TableModule } from 'primeng/table';
@@ -13,7 +12,6 @@ import { InputIconModule } from 'primeng/inputicon';
     templateUrl: './guests.component.html',
     styleUrl: './guests.component.scss',
     imports: [
-        DashboardComponent,
         TableModule,
         PaginatorModule,
         IconFieldModule,
@@ -58,6 +56,11 @@ export class GuestsComponent {
         this.invitationService.getInvitations(page, size, filter).subscribe({
           next: (data) => {
             this.guestsList = data.invitations;
+            // CHECK DATA:
+            console.log(this.guestsList.length)
+            this.guestsList.forEach(element =>{
+                console.log(element);
+            })
             // Pagination:
             this.first = page * size + 1; // Calculate index of first item shown
             this.rows = size; // Update size input from the request
