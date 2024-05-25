@@ -15,7 +15,7 @@ export class GuestService {
     return this.http
       .get<any>(
         environment.API_ENDPOINT +
-          'invitaciones/?page=' +
+          'guests/?page=' +
           page +
           '&size=' +
           Math.ceil(size) + 
@@ -25,7 +25,7 @@ export class GuestService {
 
   getFilteredGuests(filter: string): Observable<any[]> {
     return this.http
-      .get<any[]>(environment.API_ENDPOINT + 'invitaciones/', {
+      .get<any[]>(environment.API_ENDPOINT + 'guests/', {
         params: { filter: filter },
       })
       .pipe(
@@ -37,13 +37,13 @@ export class GuestService {
 
   deleteGuest(id: number): Observable<Guest> {
     return this.http.delete<Guest>(
-      environment.API_ENDPOINT + 'invitaciones/' + id
+      environment.API_ENDPOINT + 'guests/' + id
     );
   }
 
   modifyGuest(guest: Guest): Observable<Object> {
     return this.http.put(
-      environment.API_ENDPOINT + 'invitaciones/' + guest.id,
+      environment.API_ENDPOINT + 'guests/' + guest.id,
       guest
     );
   }

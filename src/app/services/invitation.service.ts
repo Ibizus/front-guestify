@@ -16,7 +16,7 @@ export class InvitationService {
     return this.http
       .get<any>(
         environment.API_ENDPOINT +
-          'invitaciones/?page=' +
+          'invitations/?page=' +
           page +
           '&size=' +
           Math.ceil(size) + 
@@ -26,7 +26,7 @@ export class InvitationService {
 
   getFilteredInvitations(filter: string): Observable<any[]> {
     return this.http
-      .get<any[]>(environment.API_ENDPOINT + 'invitaciones/', {
+      .get<any[]>(environment.API_ENDPOINT + 'invitations/', {
         params: { filter: filter },
       })
       .pipe(
@@ -38,13 +38,13 @@ export class InvitationService {
 
   deleteInvitation(id: number): Observable<Invitation> {
     return this.http.delete<Invitation>(
-      environment.API_ENDPOINT + 'invitaciones/' + id
+      environment.API_ENDPOINT + 'invitations/' + id
     );
   }
 
   modifyInvitation(invitation: Invitation): Observable<Object> {
     return this.http.put(
-      environment.API_ENDPOINT + 'invitaciones/' + invitation.id,
+      environment.API_ENDPOINT + 'invitations/' + invitation.id,
       invitation
     );
   }

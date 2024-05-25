@@ -1,5 +1,41 @@
-<app-dashboard></app-dashboard>
+<div class="card mt-24">
+    <p-table 
+    [value]="giftsList" 
+    styleClass="p-datatable-striped p-datatable-sm"
+    sortMode="multiple"
+>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" class="header-cell">
+                    <div class="header-content">Name<p-sortIcon field="name"/></div>
+                </th>
+                <th pSortableColumn="selected" class="header-cell">
+                    <div class="header-content">Selected<p-sortIcon field="selected"/></div>
+                </th>
+                <th [width]="200">
+                    <div class="flex justify-center">
+                      <p-iconField iconPosition="right" class="mr-0">
+                        <p-inputIcon styleClass="pi pi-search"/>
+                          <input 
+                              pInputText 
+                              type="text" 
+                              (input)="onInputChange($event)"
+                              placeholder="Search" 
+                              class="bg-slate-200 p-2 rounded"
+                          />
+                      </p-iconField>
+                    </div>
+                  </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-invitation>
+            <tr>
+                <td>{{ invitation.name }}</td>
+                <td>{{ invitation.selected }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-<div class="mt-20 w-full aspect-video bg-gray-300 content-center">
-    <p class="text-5xl font-bold text-center">gifts works!</p>
+    <p-paginator id="p-dropdown-paginator" (onPageChange)="paginate($event)" [first]="first" [rows]="rows" [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
 </div>
