@@ -59,7 +59,7 @@ interface Menu {
 interface Task {
     id: number;
     description: string;
-    deathLine: Date;
+    deadline: string;
     done: boolean;
 }
 
