@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
     selector: 'app-todos',
@@ -16,6 +17,7 @@ import { InputIconModule } from 'primeng/inputicon';
         PaginatorModule,
         IconFieldModule,
         InputIconModule,
+        CheckboxModule
     ]
 })
 export class TodosComponent {
