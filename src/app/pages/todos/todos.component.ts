@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
@@ -17,10 +18,13 @@ import { CheckboxModule } from 'primeng/checkbox';
         PaginatorModule,
         IconFieldModule,
         InputIconModule,
-        CheckboxModule
+        CheckboxModule,
+        ReactiveFormsModule
     ]
 })
 export class TodosComponent {
+
+  formGroup: FormGroup | undefined;
 
     tasksList !: Task[];
     // Pagination variables with default values:

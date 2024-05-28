@@ -9,6 +9,7 @@
                 <th pSortableColumn="done" class="header-cell">
                     <div class="header-content">Done<p-sortIcon field="done"/></div>
                 </th>
+                <th></th>
                 <th pSortableColumn="description" class="header-cell">
                     <div class="header-content">Description<p-sortIcon field="description"/></div>
                 </th>
@@ -32,10 +33,30 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-task>
+
+            <!-- @if(task.done){
+                <tr class="line-through">
+            }@else {<tr>} -->
             <tr>
+                <td [pEditableColumn]="task.done" pEditableColumnField="done">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input
+                          pInputText
+                          type="checkbox"
+                          checked="true"
+                          [(ngModel)]="task.done" 
+                        />
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{ task.done ? "Hecho" : "Pendiente" }}
+                      </ng-template>
+                    </p-cellEditor>
+                </td>
+
                 <td>
                     <p-checkbox 
-                    [(ngModel)]="task.done" 
+                    [(ngModel)]="this.task.done" 
                     [binary]="true" 
                     inputId="binary" 
                     />
@@ -50,3 +71,5 @@
     <p-paginator id="p-dropdown-paginator" (onPageChange)="paginate($event)" [first]="first" [rows]="rows" [showCurrentPageReport]="true"
     [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
 </div>
+
+<!-- class=@if(task.done){line-through} -->
