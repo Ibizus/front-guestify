@@ -12,7 +12,7 @@
         (click)="toggleOpen(tab.id)"
         class="bg-gray-100 flex justify-between text-xl font-bold p-4 text-start rounded-md"
       >
-        <span>{{ tab.title }}</span>
+        <span>{{ tab.id }}. {{ tab.title }}</span>
         <span class="text-sm px-2">{{
           tabs[tab.id - 1].visible ? "▽" : "◁"
         }}</span>
