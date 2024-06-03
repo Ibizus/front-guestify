@@ -94,6 +94,10 @@ interface Tab {
     visible: boolean;
   }
 
+interface MessageResponse {
+    message: string;
+}
+
 export {
     User,
     Invitation,
@@ -104,5 +108,6 @@ export {
     Task,
     Picture,
     Wedding,
-    Tab
+    Tab,
+    MessageResponse
 }
