@@ -20,6 +20,7 @@ module.exports = {
           400: '#87a286',
           600: '#5c795b',
         },
+
       }
     },
     colors: {
@@ -28,6 +29,12 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
+      green: colors.green,
+      blue: colors.blue,
+      purple: colors.violet,
+      yellow: colors.amber,
+      pink: colors.fuchsia,
+      red: colors.red
     },
     plugins: [
       require('tailwindcss/colors'),
