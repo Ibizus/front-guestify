@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Task } from '../../utils/types';
 import { TaskService } from '../../services/task.service';
+import { ToastModule } from 'primeng/toast'
+import { ToastService } from '../../services/toast.service';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -19,8 +21,10 @@ import { CheckboxModule } from 'primeng/checkbox';
         IconFieldModule,
         InputIconModule,
         CheckboxModule,
-        ReactiveFormsModule
-    ]
+        ReactiveFormsModule,
+        ToastModule
+    ],
+    providers: [ToastService]
 })
 export class TodosComponent {
 
@@ -37,7 +41,8 @@ export class TodosComponent {
     filter: string = '';
 
     constructor(
-        private taskService: TaskService
+        private taskService: TaskService,
+        private toastService: ToastService
     ){}
 
     ngOnInit() {
@@ -71,7 +76,10 @@ export class TodosComponent {
             this.currentPage = data.currentPage + 1; // In back first page is index 0
             this.totalRecords = data.totalItems;
           },
-          error: (error) => {console.error(error)},
+          error: (error) => {
+            console.error(error);
+            this.toastService.error(error);
+          },
         });
       }
 }
