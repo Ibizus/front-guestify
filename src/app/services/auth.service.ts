@@ -22,11 +22,11 @@ export class AuthService {
     private storageService: StorageService) { }
 
 
-  login(username: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<any> {
     return this.httpClient.post(
       this.apiAuthURL + 'login',
       {
-        username,
+        email,
         password,
       },
       this.httpOptions
@@ -40,7 +40,9 @@ export class AuthService {
   */
 
   register(username: string, password: string, email: string, rol: string): Observable<any> {
-    let registerRequest = { "username": username,
+    let registerRequest = 
+    { 
+      "username": username,
       "password": password,
       "email": email,
       "roles": [rol]

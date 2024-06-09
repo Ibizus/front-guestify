@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
   form: any = {
-    username: null,
+    email: null,
     password: null
   };
   isLoggedIn = false;
@@ -39,10 +39,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const { email, password } = this.form;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: data => {
+        console.log(data);
+
         this.storageService.clean();
         this.storageService.saveUser(data);
 

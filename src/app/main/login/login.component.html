@@ -1,7 +1,6 @@
 <div class="w-full m-auto lg:max-w-96">
   <div class="text-center">
     <h4 class="text-2xl font-bold mt-2">Inicia sesión</h4>
-    <p>o crea tu cuenta</p>
   </div>
 
   <form
@@ -11,22 +10,22 @@
     novalidate
   >
     <div class="form-group flex flex-col mt-5">
-      <label for="username">Nombre de usuario</label>
+      <label for="email">Email de la cuenta</label>
       <input
-        id="username"
+        id="email"
         type="text"
         class="form-control bg-secondary text-white rounded-md py-1 px-4"
-        name="username"
-        [(ngModel)]="form.username"
+        name="email"
+        [(ngModel)]="form.email"
         required
-        #username="ngModel"
-        [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+        #email="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
       />
       <div
-        *ngIf="username.errors && f.submitted"
+        *ngIf="email.errors && f.submitted"
         class="invalid-feedback text-xs text-primary-600"
       >
-        El usuario es requerido
+        El email es requerido
       </div>
     </div>
     <div class="form-group flex flex-col mt-5">
