@@ -26,7 +26,7 @@ export const canActivate: CanActivateFn = (
   const storageService = inject(StorageService);
   const router = inject(Router);
   if (!storageService.isLoggedIn()) {
-    router.navigateByUrl('/login').then();
+    router.navigateByUrl('/home').then();
     return false;
   } else {
     return true;

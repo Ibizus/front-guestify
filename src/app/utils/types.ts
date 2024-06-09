@@ -87,12 +87,13 @@ interface Wedding {
     gifts: Gift[];
     pictures: Picture[];
 }
+
 interface Tab {
     id: number;
     title: string;
     content: string;
     visible: boolean;
-  }
+}
 
 interface MessageResponse {
     message: string;

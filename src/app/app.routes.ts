@@ -25,7 +25,7 @@ export const routes: Routes = [
     {path: "guests", component: GuestsComponent},
     {
         path: "dashboard", 
-        component: DashboardComponent, canActivate: [canActivate],
+        component: DashboardComponent,
         children: [
             {path: "guests", component: GuestsComponent},
             {path: "gifts", component: GiftsComponent},
