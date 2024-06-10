@@ -1,57 +1,75 @@
 <div class="card mt-24 w-full rounded-md">
-    <div class="header-t">
-      <h4 class="text-2xl font-semibold mx-2">Regalos</h4>
-      <div class="flex justify-end">
-        <p-iconField iconPosition="right" class="mr-0">
-          <p-inputIcon styleClass="pi pi-search" />
-          <input
-            pInputText
-            type="text"
-            (input)="onInputChange($event)"
-            placeholder="Search"
-          />
-        </p-iconField>
-      </div>
+  <div class="header-t">
+    <h4 class="text-2xl font-semibold mx-2">Regalos</h4>
+    <div class="flex justify-end">
+      <p-inputIcon
+        styleClass="pi pi-plus"
+        class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+      />
+      <p-iconField iconPosition="right" class="mr-0">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          (input)="onInputChange($event)"
+          placeholder="Search"
+        />
+      </p-iconField>
     </div>
-  
-    <div class="w-full rounded-md">
-      <p-table
-        [value]="giftsList"
-        styleClass="p-datatable-striped p-datatable-sm"
-        sortMode="multiple"
-      >
-        <ng-template pTemplate="header" class="table-header">
-          <tr>
-            <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
-              <div class="header-content flex items-center mx-4">
-                Name<p-sortIcon field="name" />
-              </div>
-            </th>
-            <th
-              pSortableColumn="selected"
-              class="header-cell each-cell last-h-cell"
-            >
-              <div class="header-content flex items-center mx-4">
-                Selected<p-sortIcon field="selected" />
-              </div>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-invitation>
-          <tr class="info-row">
-            <td class="info-cells">{{ invitation.name }}</td>
-            <td class="info-cells">{{ invitation.selected }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-    <p-paginator
-      id="p-dropdown-paginator"
-      (onPageChange)="paginate($event)"
-      [first]="first"
-      [rows]="rows"
-      [showCurrentPageReport]="true"
-      [totalRecords]="totalRecords"
-      [rowsPerPageOptions]="[5, 10, 20]"
-    ></p-paginator>
   </div>
+
+  <div class="w-full rounded-md">
+    <p-table
+      [value]="giftsList"
+      styleClass="p-datatable-striped p-datatable-sm"
+      sortMode="multiple"
+    >
+      <ng-template pTemplate="header" class="table-header">
+        <tr>
+          <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
+            <div class="header-content flex items-center mx-4">
+              Name<p-sortIcon field="name" />
+            </div>
+          </th>
+          <th pSortableColumn="selected" class="header-cell each-cell">
+            <div class="header-content flex items-center mx-4">
+              Selected<p-sortIcon field="selected" />
+            </div>
+          </th>
+          <th pSortableColumn="" class="header-cell each-cell last-h-cell">
+            <div class="header-content flex items-center mx-4"></div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-invitation>
+        <tr class="info-row">
+          <td class="info-cells">{{ invitation.name }}</td>
+          <td class="info-cells">{{ invitation.selected }}</td>
+          <td class="info-cells">
+            <p-inputIcon
+              styleClass="pi pi-pencil"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              class="mr-4 cursor-pointer hover:text-yellow-500"
+            />
+            <p-inputIcon
+              styleClass="pi pi-trash"
+              pTooltip="Borrar"
+              tooltipPosition="top"
+              class="cursor-pointer hover:text-red-600"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-paginator
+    id="p-dropdown-paginator"
+    (onPageChange)="paginate($event)"
+    [first]="first"
+    [rows]="rows"
+    [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  ></p-paginator>
+</div>

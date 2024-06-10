@@ -9,6 +9,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-todos',
@@ -22,7 +23,8 @@ import { CheckboxModule } from 'primeng/checkbox';
         InputIconModule,
         CheckboxModule,
         ReactiveFormsModule,
-        ToastModule
+        ToastModule,
+        TooltipModule
     ],
     providers: [ToastService]
 })
@@ -81,5 +83,30 @@ export class TodosComponent {
             this.toastService.error(error);
           },
         });
-      }
+    }
+
+    sleep(ms: number | undefined) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+  
+    deleteTask(id: number) {
+      this.taskService.deleteTask(id).subscribe({
+        next: (data) => {
+          this.ngOnInit;
+          this.sleep(1000).then(() => {
+            this.toastService.success('Tarea eliminada');
+          });
+        },
+        error: (error) => {
+          this.toastService.error(error);
+        },
+      });
+    }
+
+    toggleModal() {
+      const modal = document.getElementById('crud-modal');
+      modal?.classList.toggle('hidden');
+      modal?.classList.toggle('flex');
+    }
+
 }

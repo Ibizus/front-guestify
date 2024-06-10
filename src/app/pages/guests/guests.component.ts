@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-guests',
@@ -16,6 +17,7 @@ import { InputIconModule } from 'primeng/inputicon';
         PaginatorModule,
         IconFieldModule,
         InputIconModule,
+        TooltipModule
     ]
 })
 export class GuestsComponent {
@@ -66,5 +68,11 @@ export class GuestsComponent {
           },
           error: (error) => {console.error(error)},
         });
+      }
+
+      toggleModal() {
+        const modal = document.getElementById('crud-modal');
+        modal?.classList.toggle('hidden');
+        modal?.classList.toggle('flex');
       }
 }
