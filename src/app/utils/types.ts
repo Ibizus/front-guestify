@@ -21,8 +21,8 @@ interface Invitation {
     email: string;
     accepted: boolean;
     allergies: string;
-    wedding: Wedding;
-    guest: Guest;
+    weddingId: number;
+    guestId: number;
 }
 
 interface Guest {

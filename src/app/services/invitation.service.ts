@@ -36,6 +36,18 @@ export class InvitationService {
       );
   }
 
+  getInvitationById(id: number): Observable<any> {
+
+    console.log('Enviando peticion http GET: '
+      + environment.API_ENDPOINT
+      + 'invitations/' + id
+    )
+
+    return this.http
+      .get<any[]>(environment.API_ENDPOINT + 'invitations/' + id);
+  }
+
+
   deleteInvitation(id: number): Observable<Invitation> {
     return this.http.delete<Invitation>(
       environment.API_ENDPOINT + 'invitations/' + id

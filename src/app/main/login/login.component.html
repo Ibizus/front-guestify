@@ -10,6 +10,7 @@
     #f="ngForm"
     novalidate
   >
+    <!--EMAIL INPUT-->
     <div class="form-group flex flex-col mt-5">
       <label for="email">Email</label>
       <input
@@ -29,6 +30,7 @@
         El email es requerido
       </div>
     </div>
+    <!--PASSWORD INPUT-->
     <div class="form-group flex flex-col mt-5">
       <label for="password">Contraseña</label>
       <input
@@ -58,22 +60,25 @@
       </div>
     </div>
 
+    <!--LOGIN BUTTON-->
     <div class="form-group flex flex-col justify-center">
       <button
         class="btn btn-primary btn-block shadow border-2 transition-all border-secondary-600 hover:bg-secondary-600 hover:text-white focus:shadow-outline focus:outline-nonefont-bold py-2 px-12 rounded-full"
-        style="margin-top: 20px"
-      >
+        style="margin-top: 20px">
         Iniciar Sesión
       </button>
     </div>
-    <div class="register mt-8 flex flex-col justify-center">
-      <p>¿No tienes una cuenta?</p>
-      <button
-        class="btn btn-primary btn-block shadow border-2 transition-all border-primary-600 hover:bg-primary-600 hover:text-white focus:shadow-outline focus:outline-nonefont-bold py-2 px-12 mt-2 rounded-full"
-        href=""
-      >
-        Crea una cuenta nueva
-      </button>
-    </div>
   </form>
+  <!--GOING TO REGISTRATION BUTTON-->
+  <div class="register mt-8 flex flex-col justify-center">
+    <p>¿No tienes una cuenta?</p>
+    <button
+      class="btn btn-primary btn-block shadow border-2 transition-all border-primary-600 hover:bg-primary-600 hover:text-white focus:shadow-outline focus:outline-nonefont-bold py-2 px-12 mt-2 rounded-full"
+      routerLink="/register" 
+      routerLinkActive="router-link-active"  
+      href="#"
+    >
+      Crea una cuenta nueva
+    </button>
+  </div>
 </div>

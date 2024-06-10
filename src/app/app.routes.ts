@@ -13,6 +13,7 @@ import { PicturesComponent } from './pages/pictures/pictures.component';
 import { PlanningComponent } from './pages/planning/planning.component';
 import { TodosComponent } from './pages/todos/todos.component';
 import { canActivate } from './main/security/authguard';
+import { InvitationComponent } from './main/invitation/invitation.component';
 
 export const routes: Routes = [
     {path: "home", component: LandingComponent},
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {path: "faq", component: FaqComponent},
     {path: "contact", component: ContactComponent},
     {path: "guests", component: GuestsComponent},
+    {path: "invitation/:id", component: InvitationComponent},
     {
         path: "dashboard", 
         component: DashboardComponent,

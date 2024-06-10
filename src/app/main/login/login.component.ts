@@ -4,6 +4,7 @@ import { StorageService } from '../../services/storage.service';
 import { Router } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 // import { AppComponent } from '../../app.component';
 
 @Component({
@@ -12,6 +13,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink, 
+    RouterLinkActive
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -53,7 +56,7 @@ export class LoginComponent implements OnInit {
         console.log('isLoggedIn = '+ this.isLoggedIn);
         this.roles = this.storageService.getUser().roles;
 
-        
+
         this.reloadPage();
         // this.router.navigate(['index']).then(
         //   () => {console.log('Login OK, cargando index.')}
