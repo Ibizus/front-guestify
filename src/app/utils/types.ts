@@ -73,8 +73,8 @@ interface Wedding {
     name: string;
     date: Date;
     time: Time;
-    nameCouple1: string;
-    nameCouple2: string;
+    partner1Name: string;
+    partner2Name: string;
     address: string;
     address2: string;
     postalCode: string;

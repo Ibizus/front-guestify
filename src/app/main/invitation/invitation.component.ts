@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Invitation, Wedding } from '../../utils/types';
 import { InvitationService } from '../../services/invitation.service';
+import { WeddingService } from '../../services/wedding.service';
 
 @Component({
   selector: 'app-invitation',
@@ -12,15 +13,15 @@ import { InvitationService } from '../../services/invitation.service';
 })
 export class InvitationComponent {
 
-  invitationDto: any = {
-    id: null,
-    name: null,
-    email: null,
-    accepted: null,
-    allergies: null,
-    weddingId: null,
-    guestId: null,
-  };
+  // invitationDto: any = {
+  //   id: null,
+  //   name: null,
+  //   email: null,
+  //   accepted: null,
+  //   allergies: null,
+  //   weddingId: null,
+  //   guestId: null,
+  // };
 
   id!: any;
   selectedInvitation!: Invitation;
@@ -28,32 +29,33 @@ export class InvitationComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private invitationService: InvitationService
+    private invitationService: InvitationService,
+    private weddingService: WeddingService
   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log('Id extraido de la url: ', this.id);
-
     this.getInvitation(this.id);
-    console.log('Invitacion encontrada: ', this.selectedInvitation);
-
-    //this.selectedWedding = this.selectedInvitation.wedding;
-    console.log('Boda encontrada con id: ', this.selectedInvitation.weddingId);
   }
 
   getInvitation(id: number){
     this.invitationService.getInvitationById(id).subscribe({
       next: (data) => {
-        console.log('Recibiendo respuesta del http request: ', data);
         this.selectedInvitation = data;
+        this.getWeddingById(this.selectedInvitation.weddingId);
       },
       error: (error) => {console.error(error)},
     });
   }
 
-  getWeddingFromInvitation(id: number){
-
+  getWeddingById(id: number){
+    this.weddingService.getWeddingById(id).subscribe({
+      next: (data) => {
+        console.log('Recibiendo boda del http request: ', data);
+        this.selectedWedding = data;
+      },
+      error: (error) => {console.error(error)},
+    })
   }
 
 }

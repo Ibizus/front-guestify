@@ -1,6 +1,8 @@
 <div class="card w-full flex flex-col">
     <div class="flex flex-col header justify-center p-4 mb-6">
-      <h4 class="text-2xl font-semibold text-center">Alvaro y Lola</h4>
+      <h4 class="text-4xl font-semibold text-center">
+        {{ selectedWedding.partner1Name }} & {{ selectedWedding.partner2Name }}
+      </h4>
       <p class="text-center text-xl mb-4">
         Queremos invitarte a la celebración de nuestra boda. <br />
         ¡Esto hay que celebrarlo!
@@ -18,29 +20,32 @@
             <div class="icon inline-block text-gray-800 hover:text-gray-500 mr-2">
               <i class="pi pi-calendar"></i>
             </div>
-            <p>Será el 8 de Octubre de 2024</p>
+            <p>Será el {{ selectedWedding.date }}</p>
           </div>
           <div class="info-hour flex mb-2">
             <div class="icon inline-block text-gray-800 hover:text-gray-500 mr-2">
               <i class="pi pi-clock"></i>
             </div>
-            <p>Empezará a las 18:30 de la tarde</p>
+            <p>Empezará a las {{ selectedWedding.time }}</p>
           </div>
           <div class="info-location flex max-w-80 mb-2">
             <div class="icon inline-block text-gray-800 hover:text-gray-500 mr-2">
               <i class="pi pi-map-marker"></i>
             </div>
             <p>
-              En La casona de Amandi, San Juan de Amandi, 33311 Villaviciosa,
-              Asturias
+              En {{ selectedWedding.address }}, 
+              {{ selectedWedding.address2 }}, 
+              {{ selectedWedding.city }}, 
+              {{ selectedWedding.postalCode }},
+              {{ selectedWedding.region }}
             </p>
           </div>
-          <div class="info-details flex mb-2">
+          <!-- <div class="info-details flex mb-2">
             <div class="icon inline-block text-gray-800 hover:text-gray-500 mr-2">
               <i class="pi pi-info-circle"></i>
             </div>
             <p>Es una boda Adults only</p>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="form flex flex-col md:min-w-80">
