@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Invitation } from '../../utils/types';
 import { InvitationService } from '../../services/invitation.service';
 import { TableModule } from 'primeng/table';
@@ -20,7 +20,7 @@ import { TooltipModule } from 'primeng/tooltip';
         TooltipModule
     ]
 })
-export class GuestsComponent {
+export class GuestsComponent implements OnInit{
 
     guestsList !: Invitation[];
     // Pagination variables with default values:

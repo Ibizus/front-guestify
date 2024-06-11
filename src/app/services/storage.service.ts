@@ -22,7 +22,6 @@ export class StorageService {
     if (user) {
       return JSON.parse(user);
     }
-
     return {};
   }
 
@@ -31,7 +30,6 @@ export class StorageService {
     if (user) {
       return true;
     }
-
     return false;
   }
 }

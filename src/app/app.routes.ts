@@ -14,6 +14,9 @@ import { PlanningComponent } from './pages/planning/planning.component';
 import { TodosComponent } from './pages/todos/todos.component';
 import { canActivate } from './main/security/authguard';
 import { InvitationComponent } from './main/invitation/invitation.component';
+import { OverviewComponent } from './pages/overview/overview.component';
+import { NotfoundComponent } from './main/notfound/notfound.component';
+import { NeweventComponent } from './main/newevent/newevent.component';
 
 export const routes: Routes = [
     {path: "home", component: LandingComponent},
@@ -25,10 +28,13 @@ export const routes: Routes = [
     {path: "contact", component: ContactComponent},
     {path: "guests", component: GuestsComponent},
     {path: "invitation/:id", component: InvitationComponent},
+    {path: "notfound", component: NotfoundComponent},    
+    {path: "newevent", component: NeweventComponent},    
     {
         path: "dashboard", 
         component: DashboardComponent,
         children: [
+            {path: "overview", component: OverviewComponent},
             {path: "guests", component: GuestsComponent},
             {path: "gifts", component: GiftsComponent},
             {path: "pictures", component: PicturesComponent},

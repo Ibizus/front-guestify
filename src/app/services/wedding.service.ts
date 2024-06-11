@@ -28,17 +28,12 @@ export class WeddingService {
       .get<any>(environment.API_ENDPOINT + 'weddings/' + id);
   }
 
-  // getFilteredWeddings(filter: string): Observable<any[]> {
-  //   return this.http
-  //     .get<any[]>(environment.API_ENDPOINT + 'weddings/', {
-  //       params: { filter: filter },
-  //     })
-  //     .pipe(
-  //       map((response: any) =>
-  //         response.map((wedding: Wedding) => wedding)
-  //       )
-  //     );
-  // }
+  getWeddingsByUserId(userid: number): Observable<any> {
+    return this.http
+      .get<any>(environment.API_ENDPOINT + 'weddings/', {
+        params: { user: userid },
+      })
+  }
 
   deleteWedding(id: number): Observable<Wedding> {
     return this.http.delete<Wedding>(
