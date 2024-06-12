@@ -7,7 +7,7 @@ import { PicturesComponent } from '../pictures/pictures.component';
 import { PlanningComponent } from '../planning/planning.component';
 import { TodosComponent } from '../todos/todos.component';
 import { StorageService } from '../../services/storage.service';
-import { Wedding } from '../../utils/types';
+// import { Wedding } from '../../utils/types';
 import { WeddingService } from '../../services/wedding.service';
 import { OverviewComponent } from "../overview/overview.component";
 

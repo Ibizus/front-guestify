@@ -1,29 +1,35 @@
 <main class="flex flex-col w-full mt-5 gap-2">
+
+  @for (wedding of userWeddings; track wedding.id) {
     <button
       class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
       type="button"
+      (click)="onSelectWedding(wedding.id)"
     >
       <a class="flex justify-between" routerLink="/dashboard">
-        <p class="text-xl font-semibold">Boda de Álvaro y Lola</p>
-        <p>22 de Junio de 2024</p>
+        <p class="text-xl font-semibold">{{ wedding.name }}</p>
+        <p>{{ wedding.date }}</p>
       </a>
     </button>
-    <button
-      class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
-      type="button"
-    >
-      <a class="flex justify-between" routerLink="/dashboard">
-        <p class="text-xl font-semibold">Boda de Juan y Juanita</p>
-        <p>3 de Abril de 2025</p>
-      </a>
-    </button>
-    <button
-      class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
-      type="button"
-    >
-      <a class="flex justify-between" routerLink="/dashboard">
-        <p class="text-xl font-semibold">Boda de Pepa y Pepita</p>
-        <p>14 de Septiembre de 2024</p>
-      </a>
-    </button>
-  </main>
+  }
+
+  <!-- <button
+    class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
+    type="button"
+  >
+    <a class="flex justify-between" routerLink="/dashboard">
+      <p class="text-xl font-semibold">Boda de Juan y Juanita</p>
+      <p>3 de Abril de 2025</p>
+    </a>
+  </button>
+
+  <button
+    class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
+    type="button"
+  >
+    <a class="flex justify-between" routerLink="/dashboard">
+      <p class="text-xl font-semibold">Boda de Pepa y Pepita</p>
+      <p>14 de Septiembre de 2024</p>
+    </a>
+  </button> -->
+</main>
