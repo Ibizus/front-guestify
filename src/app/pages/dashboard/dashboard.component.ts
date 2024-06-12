@@ -50,7 +50,7 @@ export class DashboardComponent {
       this.weddingService.getWeddingsByUserId(this.userId).subscribe({
         next: (data) => {
             console.log(data);
-            this.userWeddings = data;
+            this.userWeddings = data.weddings;
 
             // If no weddings created redirects to notfound:
             if(this.userWeddings.length <= 0){
@@ -65,7 +65,7 @@ export class DashboardComponent {
     }else{
       // If no user redirects to home:
       console.log('Redireccionando a home')
-      //this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
     }
   }
  
