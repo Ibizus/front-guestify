@@ -11,12 +11,10 @@ export class InvitationService {
 
   constructor(private http: HttpClient) {}
 
-
   getInvitations(weddingId: number, page: number, size: number, filter: string): Observable<any> {
     return this.http
       .get<any>(
-        environment.API_ENDPOINT +
-          'invitations/?'+
+        environment.API_ENDPOINT + 'invitations/?'+
           'id=' + weddingId + 
           '&page=' + page +
           '&size=' + Math.ceil(size) + 

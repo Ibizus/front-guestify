@@ -14,7 +14,6 @@ import { StorageService } from '../../services/storage.service';
 })
 export class OverviewComponent {
 
-
   @Input() userWeddings!:any[];
   private router: Router = new Router();
   selectedWeddingId!: number;

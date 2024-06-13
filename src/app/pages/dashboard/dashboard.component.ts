@@ -10,6 +10,7 @@ import { StorageService } from '../../services/storage.service';
 // import { Wedding } from '../../utils/types';
 import { WeddingService } from '../../services/wedding.service';
 import { OverviewComponent } from "../overview/overview.component";
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-dashboard',
@@ -25,13 +26,16 @@ import { OverviewComponent } from "../overview/overview.component";
         PicturesComponent,
         PlanningComponent,
         TodosComponent,
-        OverviewComponent
+        OverviewComponent,
+        NgClass
     ]
 })
 export class DashboardComponent {
 
   userId!:number;
   userWeddings!:any[];
+  selectedWeddingId!: number;
+  isAnyWeddingSelected: boolean = false;
   private router: Router = new Router();
 
   constructor(
@@ -56,6 +60,11 @@ export class DashboardComponent {
             if(this.userWeddings.length <= 0){
               console.log('Redireccionando a bodas no encontradas')
               this.router.navigate(['/notfound']);
+            }else{
+              this.selectedWeddingId = this.storageService.getWeddingId();
+              if(this.selectedWeddingId>=0){
+                this.isAnyWeddingSelected = true;
+              }
             }
         },
         error: (err) => {

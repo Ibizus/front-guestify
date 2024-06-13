@@ -11,22 +11,21 @@ export class GiftService {
 
   constructor(private http: HttpClient) {}
 
-  getGifts(page: number, size: number, filter: string): Observable<any> {
+  getGifts(weddingId: number, page: number, size: number, filter: string): Observable<any> {
     return this.http
-      .get<any>(
-        environment.API_ENDPOINT +
-          'gifts/?page=' +
-          page +
-          '&size=' +
-          Math.ceil(size) + 
-          (filter.length > 0 ? ('&filter=' + filter):('')
+    .get<any>(
+      environment.API_ENDPOINT + 'gifts/?'+
+        'id=' + weddingId + 
+        '&page=' + page +
+        '&size=' + Math.ceil(size) + 
+        (filter.length > 0 ? ('&filter=' + filter):('')
       ));
   }
 
-  getFilteredGifts(filter: string): Observable<any[]> {
+  getFilteredGifts(weddingId: number, filter: string): Observable<any[]> {
     return this.http
       .get<any[]>(environment.API_ENDPOINT + 'gifts/', {
-        params: { filter: filter },
+        params: { id: weddingId , filter: filter },
       })
       .pipe(
         map((response: any) =>

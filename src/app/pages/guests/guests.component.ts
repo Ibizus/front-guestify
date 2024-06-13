@@ -7,6 +7,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-guests',
@@ -23,6 +24,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class GuestsComponent implements OnInit{
 
+  private router: Router = new Router();
   selectedWeddingId!: number;
   guestsList !: Invitation[];
   // Pagination variables with default values:
@@ -45,9 +47,10 @@ export class GuestsComponent implements OnInit{
     console.log('weddingId recuperado de storageService en el OnInit de Guests', this.selectedWeddingId)
 
     if(this.selectedWeddingId>=0){
-
       console.log('Recuperando invitaciones del backend:');
       this.getInvitations(this.selectedWeddingId, this.demandedPage, this.rows, '')
+    }else{
+      this.router.navigate(['/dashboard']);
     }
   }
 

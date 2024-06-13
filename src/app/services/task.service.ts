@@ -11,22 +11,21 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  getTasks(page: number, size: number, filter: string): Observable<any> {
+  getTasks(weddingId: number, page: number, size: number, filter: string): Observable<any> {
     return this.http
-      .get<any>(
-        environment.API_ENDPOINT +
-          'tasks/?page=' +
-          page +
-          '&size=' +
-          Math.ceil(size) + 
-          (filter.length > 0 ? ('&filter=' + filter):('')
+    .get<any>(
+      environment.API_ENDPOINT + 'tasks/?'+
+        'id=' + weddingId + 
+        '&page=' + page +
+        '&size=' + Math.ceil(size) + 
+        (filter.length > 0 ? ('&filter=' + filter):('')
       ));
   }
 
-  getFilteredTasks(filter: string): Observable<any[]> {
+  getFilteredTasks(weddingId: number, filter: string): Observable<any[]> {
     return this.http
       .get<any[]>(environment.API_ENDPOINT + 'tasks/', {
-        params: { filter: filter },
+        params: { id: weddingId , filter: filter },
       })
       .pipe(
         map((response: any) =>

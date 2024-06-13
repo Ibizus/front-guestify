@@ -3,11 +3,42 @@
   <div class="w-full content-center flex md:flex-row flex-col-reverse justify-between mt-2 gap-2">
     <div class="flex-1 bg-secondary flex rounded-md">
       <ul routerLink="active" class="flex md:flex-col flex-row sm:p-0 md:p-2 lg:p-6 content-around m-auto">
-        <li class="p-2 m-auto"><a routerLink="guests" routerLinkActive="router-link-active"  href="#">Invitados</a></li>
-        <li class="p-2 m-auto"><a routerLink="todos" routerLinkActive="router-link-active"  href="#">Tareas</a></li>
-        <li class="p-2 m-auto"><a routerLink="planning" routerLinkActive="router-link-active"  href="#">Planing</a></li>
-        <li class="p-2 m-auto"><a routerLink="gifts" routerLinkActive="router-link-active"  href="#">Whislist</a></li>
-        <li class="p-2 m-auto"><a routerLink="pictures" routerLinkActive="router-link-active"  href="#">Fotos</a></li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'guests' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Invitados</a>
+        </li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'todos' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Tareas</a>
+        </li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'menus' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Menus</a>
+        </li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'planning' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Planning</a>
+        </li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'gifts' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Regalos</a>
+        </li>
+        <li class="p-2 m-auto"><a 
+          [routerLink]="isAnyWeddingSelected ? 'pictures' : null"
+          [ngClass]="{'disabled-link': !isAnyWeddingSelected}" 
+          routerLinkActive="router-link-active"  
+          href="#">Fotos</a>
+        </li>
       </ul>
     </div>
     <div class="flex-2">
