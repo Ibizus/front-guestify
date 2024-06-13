@@ -31,7 +31,7 @@ export class StorageService {
     return {};
   }
 
-  public getWedding(): number {
+  public getWeddingId(): number {
     const wedding = window.sessionStorage.getItem(WEDDING_KEY);
     if (wedding) {
       return JSON.parse(wedding);

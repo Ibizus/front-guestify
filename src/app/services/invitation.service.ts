@@ -12,22 +12,22 @@ export class InvitationService {
   constructor(private http: HttpClient) {}
 
 
-  getInvitations(page: number, size: number, filter: string): Observable<any> {
+  getInvitations(weddingId: number, page: number, size: number, filter: string): Observable<any> {
     return this.http
       .get<any>(
         environment.API_ENDPOINT +
-          'invitations/?page=' +
-          page +
-          '&size=' +
-          Math.ceil(size) + 
+          'invitations/?'+
+          'id=' + weddingId + 
+          '&page=' + page +
+          '&size=' + Math.ceil(size) + 
           (filter.length > 0 ? ('&filter=' + filter):('')
       ));
   }
 
-  getFilteredInvitations(filter: string): Observable<any[]> {
+  getFilteredInvitations(weddingId: number, filter: string): Observable<any[]> {
     return this.http
       .get<any[]>(environment.API_ENDPOINT + 'invitations/', {
-        params: { filter: filter },
+        params: { id: weddingId , filter: filter },
       })
       .pipe(
         map((response: any) =>
