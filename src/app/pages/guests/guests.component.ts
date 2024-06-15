@@ -86,9 +86,9 @@ export class GuestsComponent implements OnInit{
       });
     }
 
-    toggleModal() {
-      const modal = document.getElementById('crud-modal');
-      modal?.classList.toggle('hidden');
-      modal?.classList.toggle('flex');
-    }
+    // toggleModal() {
+    //   const modal = document.getElementById('crud-modal');
+    //   modal?.classList.toggle('hidden');
+    //   modal?.classList.toggle('flex');
+    // }
 }

@@ -1,9 +1,16 @@
-.allcontent {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
-  
+
+.allcontent {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
+}
+
 .stickyfooter {
-    margin-top: auto;
+  margin-top: auto;
 }

@@ -56,8 +56,16 @@ input:focus {
   background-color: #eaeaea;
 }
 
-.info-cells {
-  padding: 0.6rem 1.4rem;
+@media (max-width: 640px) {
+  .info-cells {
+    padding: 0.6rem 0.2rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .info-cells {
+    padding: 0.6rem 1.3rem;
+  }
 }
 
 #p-dropdown-paginator {

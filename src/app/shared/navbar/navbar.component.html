@@ -1,24 +1,163 @@
-
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-300 text-sm py-4">
-  <nav class="max-w-5xl w-full mx-auto sm:flex sm:items-center sm:justify-between" aria-label="Global">
-    <div class="flex items-center justify-between">
-      <a class="flex-none absolute top-10 w-fit bg-primary p-2 rounded-lg" href="#">
-        <img class="" src="../assets/images/Logo.svg" alt="Logo">
-      </a>
+<header
+  class="flex flex-wrap sm:justify-start xs:justify-end sm:flex-nowrap w-full bg-gray-300 text-sm py-4"
+>
+  <nav
+    class="max-w-5xl w-full mx-auto sm:flex sm:items-center sm:justify-between"
+    aria-label="Global"
+  >
+    <a
+      class="flex-none absolute top-10 bg-primary pt-1 pb-2 px-2 rounded-lg xs:ml-4 md:w-[200px] xs:w-[150px]"
+      href="#"
+    >
+      <img src="../assets/images/Logo.svg" alt="Logo" />
+    </a>
+    <div class="flex items-center justify-end mr-4">
       <div class="sm:hidden">
-        <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-image-2" aria-controls="navbar-image-2" aria-label="Toggle navigation">
-          <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-          <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <button
+          type="button"
+          class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+          data-hs-collapse="#navbar-image-2"
+          aria-controls="navbar-image-2"
+          aria-label="Toggle navigation"
+          (click)="toggleMenu()"
+        >
+          <svg
+            class="hs-collapse-open:hidden flex-shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" x2="21" y1="6" y2="6" />
+            <line x1="3" x2="21" y1="12" y2="12" />
+            <line x1="3" x2="21" y1="18" y2="18" />
+          </svg>
+          <svg
+            class="hs-collapse-open:block hidden flex-shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
         </button>
       </div>
     </div>
-    <div id="navbar-image-2" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-      <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5" routerLinkActive="active">
-        <a routerLink="/tools" class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full" href="#">Servicios</a>
-        <a routerLink="/dashboard" class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full" href="#">Mi Proyecto</a>
-        <a routerLink="/login" class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full" href="#">Inicia Sesión</a>
-        <a (click)="logout()" class="font-medium text-gray-600 hover:text-gray-400 bg-primary-400 py-1 px-6 rounded-full" href="#">Yo</a>
+    <div
+      id="navbar-image-2"
+      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
+    >
+      <div
+        class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mr-4 sm:mt-0 sm:ps-5"
+        routerLinkActive="active"
+      >
+        <a
+          routerLink="/tools"
+          class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full"
+          href="#"
+          >Servicios</a
+        >
+        <a
+          routerLink="/dashboard"
+          class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full"
+          href="#"
+          >Mi Proyecto</a
+        >
+        @if(loggedIn) {
+        <a
+          (click)="logout()"
+          class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full"
+          href="#"
+          >Cerrar sesión</a
+        >
+        } @else {
+        <a
+          routerLink="/login"
+          class="font-medium text-gray-600 hover:text-gray-400 bg-white py-1 px-6 rounded-full"
+          href="#"
+          >Iniciar sesión</a
+        >
+        }
+
+        <a
+          routerLink="/account"
+          class="font-medium text-gray-600 hover:text-gray-400 bg-primary-400 py-1 px-2 rounded-full"
+          href="#"
+          >Yo</a
+        >
       </div>
     </div>
   </nav>
+  <div
+    [ngClass]="{ block: isMenuOpen, hidden: !isMenuOpen }"
+    class="op100 absolute top-0 left-0 w-full h-64 bg-primary-400 bg-opacity-100 z-50 items-center text-center justify-center transition-all duration-300 sm:hidden"
+  >
+    <div class="flex flex-col justify-center text-center m-auto mt-6">
+      <button
+        type="button"
+        class="text-white hover:bg-primary-600 hover:text-white rounded-md text-sm w-8 h-8 flex items-center justify-center m-auto mb-4"
+        (click)="toggleMenu()"
+      >
+        <svg class="w-3 h-3" aria-hidden="true" fill="none" viewBox="0 0 14 14">
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+      </button>
+      <a
+        routerLink="/tools"
+        (click)="toggleMenu()"
+        class="font-medium text-gray-600 hover:text-gray-400 py-1 px-6 mb-4"
+        href="#"
+        >Servicios</a
+      >
+      <a
+        routerLink="/dashboard"
+        (click)="toggleMenu()"
+        class="font-medium text-gray-600 hover:text-gray-400 py-1 px-6 mb-4"
+        href="#"
+        >Mi Proyecto</a
+      >
+      @if(loggedIn) {
+      <a
+        (click)="logout()"
+        (click)="toggleMenu()"
+        class="ont-medium text-gray-600 hover:text-gray-400 py-1 px-6 mb-4"
+        href="#"
+        >Cerrar sesión</a
+      >
+      } @else {
+      <a
+        routerLink="/login"
+        (click)="toggleMenu()"
+        class="font-medium text-gray-600 hover:text-gray-400 py-1 px-6 mb-4"
+        href="#"
+        >Iniciar sesión</a
+      >
+      }
+      <a
+        routerLink="/account"
+        (click)="toggleMenu()"
+        class="font-medium text-gray-600 hover:text-gray-400 py-1 px-6"
+        href="#"
+        >Mi cuenta</a
+      >
+    </div>
+  </div>
 </header>

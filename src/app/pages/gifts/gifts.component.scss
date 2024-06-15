@@ -1,65 +1,73 @@
 input {
-    width: 100%;
-    padding: 0.3rem 1rem;
-    font-size: 1rem;
-    background-color: rgb(182 207 181);
-    color: black;
-    border-radius: 0.35rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-  }
-  
-  input:hover {
-    border-color: #bbb;
-  }
-  
-  input:focus {
-    outline: none;
-    box-sizing: border-box;
-  
-    -webkit-box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
-    -moz-box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
-    box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
-  }
-  
-  .header-t {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
-  }
-  
-  .each-cell {
-    background-color: rgb(250 212 212);
-    transition: 0.2s ease-in-out;
-  }
-  
-  .each-cell:hover {
-    background-color: #f3a2a2;
-  }
-  
-  .first-h-cell {
-    border-radius: 0.3rem 0 0 0;
-  }
-  
-  .last-h-cell {
-    border-radius: 0 0.3rem 0 0;
-  }
-  
-  .info-row {
-    border-bottom: 1px solid #b6cfb5;
-    transition: 0.2s ease-in-out;
-  }
-  
-  .info-row:hover {
-    background-color: #eaeaea;
-  }
-  
+  width: 100%;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  background-color: rgb(182 207 181);
+  color: black;
+  border-radius: 0.35rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+input:hover {
+  border-color: #bbb;
+}
+
+input:focus {
+  outline: none;
+  box-sizing: border-box;
+
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
+  box-shadow: inset 0px 0px 0px 2px rgba(0, 86, 179, 1);
+}
+
+.header-t {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.each-cell {
+  background-color: rgb(250 212 212);
+  transition: 0.2s ease-in-out;
+}
+
+.each-cell:hover {
+  background-color: #f3a2a2;
+}
+
+.first-h-cell {
+  border-radius: 0.3rem 0 0 0;
+}
+
+.last-h-cell {
+  border-radius: 0 0.3rem 0 0;
+}
+
+.info-row {
+  border-bottom: 1px solid #b6cfb5;
+  transition: 0.2s ease-in-out;
+}
+
+.info-row:hover {
+  background-color: #eaeaea;
+}
+
+@media (max-width: 640px) {
   .info-cells {
-    padding: 0.6rem 1.4rem;
+    padding: 0.6rem 0.2rem;
   }
-  
-  #p-dropdown-paginator {
-    background: #000;
+}
+
+@media (min-width: 640px) {
+  .info-cells {
+    padding: 0.6rem 1.3rem;
   }
+}
+
+#p-dropdown-paginator {
+  background: #000;
+}

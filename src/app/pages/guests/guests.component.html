@@ -1,4 +1,5 @@
-<div class="card mt-24 w-full rounded-md">
+
+<div class="card w-full mt-24 rounded-md">
   <div class="header-t">
     <h4 class="text-2xl font-semibold mx-2">Invitados</h4>
     <div class="flex justify-end">
@@ -27,27 +28,22 @@
       <ng-template pTemplate="header" class="table-header">
         <tr>
           <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
-            <div class="header-content flex items-center mx-4">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
               Name<p-sortIcon field="name" />
             </div>
           </th>
           <th pSortableColumn="email" class="header-cell each-cell">
-            <div class="header-content flex items-center mx-4">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
               Email<p-sortIcon field="email" />
             </div>
           </th>
           <th pSortableColumn="accepted" class="header-cell each-cell">
-            <div class="header-content flex items-center mx-4">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
               Accepted<p-sortIcon field="accepted" />
             </div>
           </th>
-          <th pSortableColumn="allergies" class="header-cell each-cell">
-            <div class="header-content flex items-center mx-4">
-              Allergies<p-sortIcon field="allergies" />
-            </div>
-          </th>
           <th pSortableColumn="" class="header-cell each-cell last-h-cell">
-            <div class="header-content flex items-center mx-4"></div>
+            <div class="header-content flex items-center md:mx-4 xs:mx-2"></div>
           </th>
         </tr>
       </ng-template>
@@ -56,8 +52,7 @@
           <td class="info-cells">{{ invitation.id }}. {{ invitation.name }}</td>
           <td class="info-cells">{{ invitation.email }}</td>
           <td class="info-cells">{{ invitation.accepted }}</td>
-          <td class="info-cells">{{ invitation.allergies }}</td>
-          <td class="info-cells">
+          <td class="info-cells flex">
             <p-inputIcon
               styleClass="pi pi-pencil"
               pTooltip="Editar"

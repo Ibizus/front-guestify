@@ -12,8 +12,14 @@
 
 /* Reset CSS */
 @layer reset {
-    button,
-    input {
-        /* CSS to Reset */
-    };
+  button,
+  input {
+    /* CSS to Reset */
+  }
 }
+
+// html,
+// body {
+//   max-width: 100%;
+//   overflow-x: hidden;
+// }
