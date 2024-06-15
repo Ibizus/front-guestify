@@ -16,7 +16,7 @@
 ></p-inputIcon>
 
 
-@if(isModalOpen==true){
+@if(isModalOpen){
 
 <!-- Main modal -->
 <div
@@ -54,10 +54,9 @@
               name="name"
               id="name"
               class="bg-secondary text-white p-2 w-full rounded-md placeholder:text-white"
-              placeholder="Escribe el nombre del regalo"
+              placeholder={{formGift.name}}
               [(ngModel)]="formGift.name"
               required="true"
-              required
               minlength="4"
             />
           </div>
@@ -66,7 +65,8 @@
           <button
             type="submit"
             class="btn btn-primary btn-block flex items-center mr-2 text-center shadow border-2 transition-all border-secondary-600 hover:bg-secondary-600 hover:text-white focus:shadow-outline focus:outline-nonefont-bold py-2 px-14 rounded-full"
-          >
+            (click)="acceptChanges()"
+            >
             Aceptar
           </button>
           <button

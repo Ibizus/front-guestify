@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { GuestsComponent } from '../guests/guests.component';
@@ -30,7 +30,7 @@ import { NgClass } from '@angular/common';
         NgClass
     ]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
   userId!:number;
   userWeddings!:any[];

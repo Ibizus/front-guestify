@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Gift } from '../../utils/types';
 import { GiftService } from '../../services/gift.service';
 import { TableModule } from 'primeng/table';
@@ -24,7 +24,7 @@ import { FormGiftComponent } from "../../modal/form-gift/form-gift.component";
         FormGiftComponent
     ]
 })
-export class GiftsComponent {
+export class GiftsComponent{
 
   callModal: EventEmitter<null> = new EventEmitter();
   private router: Router = new Router();
@@ -45,12 +45,14 @@ export class GiftsComponent {
   ){}
 
   ngOnInit() {
+    console.log("Incializando componente padre Gift");
+
     this.selectedWeddingId = this.storageService.getWeddingId();
 
     console.log('weddingId recuperado de storageService en el OnInit de Guests', this.selectedWeddingId)
 
     if(this.selectedWeddingId>=0){
-      console.log('Recuperando invitaciones del backend:');
+      console.log('Recuperando regalos del backend:');
       this.getGifts(this.selectedWeddingId, this.demandedPage, this.rows, '')
     }else{
       this.router.navigate(['/dashboard']);
@@ -77,27 +79,39 @@ export class GiftsComponent {
     this.getGifts(this.selectedWeddingId, 0, this.rows, this.filter);
   }
 
+  acceptChanges(){
+    console.log("Recibiendo evento de hijo y recarganbdo tabla de regalos del backend");
+    this.ngOnInit();
+  }
+
   getGifts(id: number, page: number, size: number, filter: string) {
-      this.giftService.getGifts(id, page, size, filter).subscribe({
-        next: (data) => {
-          this.giftsList = data.gifts;
-          // CHECK DATA:
-          console.log(data);
-          // Pagination:
-          this.first = page * size + 1; // Calculate index of first item shown
-          this.rows = size; // Update size input from the request
-          this.currentPage = data.currentPage + 1; // In back first page is index 0
-          this.totalRecords = data.totalItems;
-        },
-        error: (error) => {console.error(error)},
-      });
-    }
+    this.giftService.getGifts(id, page, size, filter).subscribe({
+      next: (data) => {
+        this.giftsList = data.gifts;
+        // CHECK DATA:
+        console.log(data);
+        // Pagination:
+        this.first = page * size + 1; // Calculate index of first item shown
+        this.rows = size; // Update size input from the request
+        this.currentPage = data.currentPage + 1; // In back first page is index 0
+        this.totalRecords = data.totalItems;
+      },
+      error: (error) => {console.error(error)},
+    });
+  }
+
+  deleteGift(id: number) {
+    console.log('Eliminando regalo con id: ', id);
+    this.giftService.deleteGift(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+      },
+      error: (error) => {
+        // this.toastService.error(error);
+      },
+    });
+  }
 
 
-
-    toggleModal() {
-      const modal = document.getElementById('crud-modal');
-      modal?.classList.toggle('hidden');
-      modal?.classList.toggle('flex');
-    }
 }
+

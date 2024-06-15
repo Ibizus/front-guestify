@@ -4,8 +4,8 @@
     <div class="flex justify-end">
       
       <app-form-gift
-      [goToModify]="callModal">
-
+      [goToModify]="callModal"
+      (tellParentChangesWereMade)="acceptChanges()">
       </app-form-gift>
 
       <p-iconField iconPosition="right" class="mr-0">
@@ -45,7 +45,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-gift>
         <tr class="info-row">
-          <td class="info-cells">{{ gift.name }}</td>
+          <td class="info-cells">{{ gift.id }}. {{ gift.name }}</td>
           <td class="info-cells">{{ gift.selected }}</td>
           <td class="info-cells">
             <p-inputIcon
@@ -60,6 +60,7 @@
               pTooltip="Borrar"
               tooltipPosition="top"
               class="cursor-pointer hover:text-red-600"
+              (click)="this.deleteGift(gift.id)"
             />
           </td>
         </tr>

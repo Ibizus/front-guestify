@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
@@ -27,14 +27,11 @@ import { TooltipModule } from 'primeng/tooltip';
 })
 export class FormGiftComponent {
 
-  isModalOpen: boolean = true;
+  isModalOpen: boolean = false;
   @Input() goToModify: EventEmitter<any> = new EventEmitter();
-  temporalGift!: Gift | null;
-  formGift: Gift = {
-    id: 0,
-    name: '',
-    selected: false
-  }
+  @Output() tellParentChangesWereMade: EventEmitter<any> = new EventEmitter();
+  temporalGift: Gift = newGift();
+  formGift: Gift = newGift();
   routerSubscription!: Subscription;
 
   constructor(
@@ -43,29 +40,39 @@ export class FormGiftComponent {
     private giftService: GiftService,
     //private toastService: ToastService
   ){
-    this.storageService.currentItem.subscribe((gift) => {
+    this.storageService.currentItem.subscribe((gift: Gift | null)=> {
       console.log("El regalo recibido del service es: ", gift);
-      this.temporalGift = gift;
+
+      if(gift != null){
+        this.temporalGift.id = gift.id;
+        this.temporalGift.name = gift.name;
+        this.temporalGift.selected = gift.selected;
+      }
     });
 
     if(!!this.temporalGift){
       this.formGift = this.temporalGift;
+      console.log("FormGift relleno con lo recibido del service: ", this.formGift);
     }
   }
 
   ngOnInit() {
+    console.log("Incializando componente hijo FormGift");
+
+
     this.goToModify.subscribe(() =>{ 
       console.log("Recibiendo aviso para editar regalo ");
 
-      this.isModalOpen = true;
+      console.log("Abriendo modal en onInit");
+      this.toggleModal();
     })
 
-    this.routerSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        // Navigation started, reset form
-        this.clearFormFields();
-      }
-    });
+    // this.routerSubscription = this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationStart) {
+    //     // Navigation started, reset form
+    //     this.clearFormFields();
+    //   }
+    // });
   }
 
   toggleModal() {
@@ -80,24 +87,27 @@ export class FormGiftComponent {
     this.formGift.id = 0;
     this.formGift.name = '';
     this.formGift.selected = false;
+    console.log("Abriendo modal en clearFormFields");
     this.toggleModal();
     this.router.navigate(['/gifts']);
   }
 
-
+  acceptChanges() {
+    console.log('Mandando evento a padre para que actualice tabla');
+    // this.tellParentChangesWereMade.emit();
+  }
 
   onSubmit() {
-    if (!!this.temporalGift) {
+    if (this.temporalGift.id > 0) {
       this.giftService.modifyGift(this.formGift).subscribe({
         next: ()=>{
+          console.log("Gift modified by this: ", this.formGift);
           // this.toastService.success(
           //   'El regalo ' +
           //     this.temporalGift?.name +
           //     ' ha sido modificado correctamente!'
           // );
-          sleep(1000).then(() => {
-            this.router.navigate(['/gifts']);
-          });
+          this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
           // this.toastService.error(error);
@@ -105,28 +115,36 @@ export class FormGiftComponent {
       })
     }else{
 
-      this.giftService.createGift(this.formGift).subscribe({
+      let selectedWeddingId = this.storageService.getWeddingId();
+
+      this.giftService.createGift(selectedWeddingId, this.formGift).subscribe({
         next: ()=>{
           // this.toastService.success(
           //   'El regalo ' +
           //     this.formGift?.name +
           //     ' se ha creado correctamente!'
           // );
-          sleep(1000).then(() => {
-            this.router.navigate(['/gifts']);
-          });
+          this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
         //   this.toastService.error(error);
         }
       })
     }
+    console.log("Abriendo modal en onSubmit");
     this.toggleModal();
-  }
 
-  
+  }
 }
 
 function sleep(ms: number | undefined) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function newGift(): Gift {
+  return {
+    id: 0,
+    name: '',
+    selected: false
+  };
 }

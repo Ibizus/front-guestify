@@ -47,7 +47,11 @@ export class GiftService {
     );
   }
 
-  createGift(gift: Gift): Observable<Object> {
-    return this.http.post(environment.API_ENDPOINT + 'gifts/', gift);
+  createGift(weddingId: number, gift: Gift): Observable<Object> {
+    console.log("mandado regalo desde el create del servicio de front");
+    return this.http.post(environment.API_ENDPOINT + 'gifts/' +
+      '?id=' + weddingId,
+       gift);
   }
+
 }
