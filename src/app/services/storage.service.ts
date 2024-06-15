@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 const USER_KEY = 'auth-user';
 const WEDDING_KEY = 'selected-wedding-id';
@@ -7,7 +8,15 @@ const WEDDING_KEY = 'selected-wedding-id';
   providedIn: 'root'
 })
 export class StorageService {
+
+  private itemSource = new BehaviorSubject(null);
+  currentItem = this.itemSource.asObservable();
+
   constructor() {}
+
+  saveItemForChanges(item: any) {
+    this.itemSource.next(item);
+  }
 
   clean(): void {
     window.sessionStorage.clear();

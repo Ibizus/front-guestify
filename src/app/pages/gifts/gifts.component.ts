@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Gift } from '../../utils/types';
 import { GiftService } from '../../services/gift.service';
 import { TableModule } from 'primeng/table';
@@ -8,6 +8,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
+import { FormGiftComponent } from "../../modal/form-gift/form-gift.component";
 
 @Component({
     selector: 'app-gifts',
@@ -19,11 +20,13 @@ import { Router } from '@angular/router';
         PaginatorModule,
         IconFieldModule,
         InputIconModule,
-        TooltipModule
+        TooltipModule,
+        FormGiftComponent
     ]
 })
 export class GiftsComponent {
 
+  callModal: EventEmitter<null> = new EventEmitter();
   private router: Router = new Router();
   selectedWeddingId!: number;
   giftsList !: Gift[];
@@ -52,6 +55,12 @@ export class GiftsComponent {
     }else{
       this.router.navigate(['/dashboard']);
     }
+  }
+
+  goToModifyGift(gift: Gift) {
+    this.storageService.saveItemForChanges(gift);
+    this.callModal.emit();
+    console.log("Emitiendo evento para editar regalo ", gift);
   }
 
   paginate(event: any) {
@@ -83,6 +92,8 @@ export class GiftsComponent {
         error: (error) => {console.error(error)},
       });
     }
+
+
 
     toggleModal() {
       const modal = document.getElementById('crud-modal');
