@@ -1,27 +1,27 @@
 <div class="w-full m-auto mt-8 px-8">
-    <div class="grid col-start-1 col-span-2">
-      <h4 class="text-3xl font-bold mx-auto">Frequently Asked Questions</h4>
-      <p class="mx-auto mb-8">
-        ¿No encuentras lo que buscas? Contáctanos y te ayudamos.
-      </p>
-    </div>
-  
-    @for (tab of tabs; track tab.id) {
-    <div class="w-full m-auto flex flex-col">
-      <button
-        (click)="toggleOpen(tab.id)"
-        class="bg-gray-100 flex justify-between text-xl font-bold p-4 text-start rounded-md"
-      >
-        <span>{{ tab.id }}. {{ tab.title }}</span>
-        <span class="text-sm px-2">{{
-          tabs[tab.id - 1].visible ? "▽" : "◁"
-        }}</span>
-      </button>
-      <div class="m-auto text-start p-2 px-4">
-        <span>{{
-          tabs[tab.id - 1].visible ? tabs[tab.id - 1].content : ""
-        }}</span>
-      </div>
-    </div>
-    }
+  <div class="grid col-start-1 col-span-2">
+    <h4 class="text-3xl font-bold mx-auto">Frequently Asked Questions</h4>
+    <p class="mx-auto mb-8">
+      ¿No encuentras lo que buscas? Contáctanos y te ayudamos.
+    </p>
   </div>
+
+  @for (tab of tabs; track tab.id) {
+  <div class="w-full m-auto flex flex-col max-w-3xl">
+    <button
+      (click)="toggleOpen(tab.id)"
+      class="bg-gray-100 flex justify-between text-xl font-bold p-4 text-start rounded-md"
+    >
+      <div>{{ tab.id }}. {{ tab.title }}</div>
+      <div class="text-sm px-2">{{
+        tabs[tab.id - 1].visible ? "▽" : "◁"
+      }}</div>
+    </button>
+    <div class="m-auto text-start p-2 px-4">
+      <div>{{
+        tabs[tab.id - 1].visible ? tabs[tab.id - 1].content : ""
+      }}</div>
+    </div>
+  </div>
+  }
+</div>
