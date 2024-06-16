@@ -3,10 +3,16 @@
   <div class="header-t">
     <h4 class="text-2xl font-semibold mx-2">Invitados</h4>
     <div class="flex justify-end">
-      <p-inputIcon
+
+      <!-- <p-inputIcon
         styleClass="pi pi-plus"
         class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-      />
+      /> -->
+      <app-form-guest
+      [goToModify]="callModal"
+      (tellParentChangesWereMade)="acceptChanges()">
+      </app-form-guest>
+
       <p-iconField iconPosition="right" class="mr-0">
         <p-inputIcon styleClass="pi pi-search" />
         <input
@@ -21,7 +27,7 @@
 
   <div class="w-full rounded-md">
     <p-table
-      [value]="guestsList"
+      [value]="invitationList"
       styleClass="p-datatable-sm p-datatable-striped"
       sortMode="multiple"
     >
@@ -29,7 +35,7 @@
         <tr>
           <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
             <div class="header-content flex items-center md:mx-4 xs:mx-2">
-              Name<p-sortIcon field="name" />
+              Nombre<p-sortIcon field="name" />
             </div>
           </th>
           <th pSortableColumn="email" class="header-cell each-cell">
@@ -39,7 +45,7 @@
           </th>
           <th pSortableColumn="accepted" class="header-cell each-cell">
             <div class="header-content flex items-center md:mx-4 xs:mx-2">
-              Accepted<p-sortIcon field="accepted" />
+              Aceptado<p-sortIcon field="accepted" />
             </div>
           </th>
           <th pSortableColumn="" class="header-cell each-cell last-h-cell">
@@ -58,12 +64,14 @@
               pTooltip="Editar"
               tooltipPosition="top"
               class="mr-4 cursor-pointer hover:text-yellow-500"
+              (click)="this.goToModifyInvitation(invitation)"
             />
             <p-inputIcon
               styleClass="pi pi-trash"
               pTooltip="Borrar"
               tooltipPosition="top"
               class="cursor-pointer hover:text-red-600"
+              (click)="this.deleteInvitation(invitation.id)"
             />
           </td>
         </tr>

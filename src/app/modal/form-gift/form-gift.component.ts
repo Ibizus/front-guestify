@@ -59,7 +59,6 @@ export class FormGiftComponent {
   ngOnInit() {
     console.log("Incializando componente hijo FormGift");
 
-
     this.goToModify.subscribe(() =>{ 
       console.log("Recibiendo aviso para editar regalo ");
 
@@ -114,9 +113,7 @@ export class FormGiftComponent {
         }
       })
     }else{
-
       let selectedWeddingId = this.storageService.getWeddingId();
-
       this.giftService.createGift(selectedWeddingId, this.formGift).subscribe({
         next: ()=>{
           // this.toastService.success(
@@ -133,7 +130,6 @@ export class FormGiftComponent {
     }
     console.log("Abriendo modal en onSubmit");
     this.toggleModal();
-
   }
 }
 

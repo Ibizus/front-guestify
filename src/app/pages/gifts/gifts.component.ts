@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Gift } from '../../utils/types';
 import { GiftService } from '../../services/gift.service';
 import { TableModule } from 'primeng/table';

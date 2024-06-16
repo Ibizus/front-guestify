@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Invitation } from '../../utils/types';
 import { InvitationService } from '../../services/invitation.service';
 import { TableModule } from 'primeng/table';
@@ -8,6 +8,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
+import { FormGuestComponent } from '../../modal/form-guest/form-guest.component';
 
 @Component({
     selector: 'app-guests',
@@ -19,14 +20,16 @@ import { Router } from '@angular/router';
         PaginatorModule,
         IconFieldModule,
         InputIconModule,
-        TooltipModule
+        TooltipModule,
+        FormGuestComponent
     ]
 })
-export class GuestsComponent implements OnInit{
+export class GuestsComponent{
 
+  callModal: EventEmitter<null> = new EventEmitter();
   private router: Router = new Router();
   selectedWeddingId!: number;
-  guestsList !: Invitation[];
+  invitationList !: Invitation[];
   // Pagination variables with default values:
   first: number = 0;
   rows: number = 10;
@@ -68,11 +71,22 @@ export class GuestsComponent implements OnInit{
     this.getInvitations(this.selectedWeddingId, 0, this.rows, this.filter);
   }
 
+  goToModifyInvitation(invitation: Invitation) {
+    this.storageService.saveItemForChanges(invitation);
+    this.callModal.emit();
+    console.log("Emitiendo evento para editar invitation ", invitation);
+  }
+
+  acceptChanges(){
+    console.log("Recibiendo evento de hijo y recarganbdo tabla de invitations del backend");
+    this.ngOnInit();
+  }
+
   getInvitations(id: number, page: number, size: number, filter: string) {
       this.invitationService.getInvitations(id, page, size, filter).subscribe({
         next: (data) => {
           console.log('Fetch OK para la boda con id:', id,);
-          this.guestsList = data.invitations;
+          this.invitationList = data.invitations;
           // CHECK DATA:
           console.log('LISTA DE INVITADOS:');
           console.log(data.invitations);
@@ -86,9 +100,16 @@ export class GuestsComponent implements OnInit{
       });
     }
 
-    // toggleModal() {
-    //   const modal = document.getElementById('crud-modal');
-    //   modal?.classList.toggle('hidden');
-    //   modal?.classList.toggle('flex');
-    // }
-}
+    deleteInvitation(id: number) {
+      console.log('Eliminando invitation con id: ', id);
+      this.invitationService.deleteInvitation(id).subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (error) => {
+          // this.toastService.error(error);
+        },
+      });
+    }
+
+  }

@@ -59,7 +59,10 @@ export class InvitationService {
     );
   }
 
-  createInvitation(invitation: Invitation): Observable<Object> {
-    return this.http.post(environment.API_ENDPOINT + 'invitations/', invitation);
+  createInvitation(weddingId: number, invitation: Invitation): Observable<Object> {
+    console.log("mandado invitation desde el create del servicio de front");
+    return this.http.post(environment.API_ENDPOINT + 'invitations/' +
+      '?id=' + weddingId,
+       invitation);
   }
 }
