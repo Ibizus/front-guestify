@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-form-gift',
@@ -20,7 +21,8 @@ import { TooltipModule } from 'primeng/tooltip';
     IconFieldModule,
     InputIconModule,
     TooltipModule,
-    CommonModule
+    CommonModule,
+    DialogModule
   ],
   templateUrl: './form-gift.component.html',
   styleUrl: './form-gift.component.scss'

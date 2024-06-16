@@ -2,10 +2,15 @@
   <div class="header-t">
     <h4 class="text-2xl font-semibold mx-2">Tareas</h4>
     <div class="flex justify-end">
-      <p-inputIcon
-        styleClass="pi pi-plus"
-        class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-      />
+
+      <!-- Modal Form Component -->
+      <app-form-todo
+        class="inline-flex"
+        [goToModify]="callModal"
+        (tellParentChangesWereMade)="acceptChanges()">
+      </app-form-todo>
+
+      <!-- Search bar -->
       <p-iconField iconPosition="right" class="mr-0">
         <p-inputIcon styleClass="pi pi-search" />
         <input
@@ -17,90 +22,94 @@
       </p-iconField>
     </div>
   </div>
-  <p-table
-    [value]="tasksList"
-    styleClass="p-datatable-striped p-datatable-sm"
-    sortMode="multiple"
-  >
-    <ng-template pTemplate="header" class="table-header">
-      <tr>
-        <th class="each-cell first-h-cell">✅</th>
-        <th pSortableColumn="done" class="header-cell each-cell">
-          <div class="header-content flex items-center">
-            Estado<p-sortIcon field="done" />
-          </div>
-        </th>
 
-        <th pSortableColumn="description" class="header-cell each-cell">
-          <div class="header-content flex items-center mx-4">
-            Descripción<p-sortIcon field="description" />
-          </div>
-        </th>
-        <th pSortableColumn="deadline" class="header-cell each-cell">
-          <div class="header-content flex items-center mx-4">
-            Deadline<p-sortIcon field="deadline" />
-          </div>
-        </th>
+  <div class="w-full rounded-md">
+    <p-table
+      [value]="tasksList"
+      styleClass="p-datatable-striped p-datatable-sm"
+      sortMode="multiple"
+    >
+      <ng-template pTemplate="header" class="table-header">
+        <tr>
+          <th class="each-cell first-h-cell">✅</th>
+          <th pSortableColumn="done" class="header-cell each-cell">
+            <div class="header-content flex items-center">
+              Estado<p-sortIcon field="done" />
+            </div>
+          </th>
 
-        <th
-          pSortableColumn="Edit or delete"
-          class="header-cell each-cell last-h-cell"
-        >
-          <div class="header-content flex items-center mx-4"></div>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-task>
-      <!-- @if(task.done){
-                  <tr class="line-through">
-              }@else {<tr>} -->
-      <tr class="info-row">
-        <td>
-          <p-checkbox
-            [(ngModel)]="this.task.done"
-            [binary]="true"
-            inputId="binary"
-          />
-        </td>
-        <td [pEditableColumn]="task.done" pEditableColumnField="done">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="checkbox"
-                checked="true"
-                [(ngModel)]="task.done"
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ task.done ? "Hecho" : "Pendiente" }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
+          <th pSortableColumn="description" class="header-cell each-cell">
+            <div class="header-content flex items-center mx-4">
+              Descripción<p-sortIcon field="description" />
+            </div>
+          </th>
+          <th pSortableColumn="deadline" class="header-cell each-cell">
+            <div class="header-content flex items-center mx-4">
+              Fecha límite<p-sortIcon field="deadline" />
+            </div>
+          </th>
 
-        <td class="info-cells">{{ task.description }}</td>
-        <td class="info-cells">{{ task.deadline }}</td>
-        <td class="info-cells">
-          <p-inputIcon
-            styleClass="pi pi-pencil"
-            pTooltip="Editar"
-            tooltipPosition="top"
-            class="mr-4 cursor-pointer hover:text-yellow-500"
-          />
-          <p-inputIcon
-            styleClass="pi pi-trash"
-            pTooltip="Borrar"
-            tooltipPosition="top"
-            class="cursor-pointer hover:text-red-600"
-            (click)="deleteTask(task.id)"
-          />
-        </td>
+          <th
+            pSortableColumn="Edit or delete"
+            class="header-cell each-cell last-h-cell"
+          >
+            <div class="header-content flex items-center mx-4"></div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-task>
+        <!-- @if(task.done){
+                    <tr class="line-through">
+                }@else {<tr>} -->
+        <tr class="info-row">
+          <td>
+            <p-checkbox
+              [(ngModel)]="this.task.done"
+              [binary]="true"
+              inputId="binary"
+            />
+          </td>
+          <td [pEditableColumn]="task.done" pEditableColumnField="done">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="checkbox"
+                  checked="true"
+                  [(ngModel)]="task.done"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ task.done ? "Hecho" : "Pendiente" }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
 
-        <!-- Crear td con iconos de editar y borrar aqui (cada icono llama a una funcion del TS. Crear en el TS la funcion editar) -->
-        <!-- Crear tambien el TH vacío para que cuadre la fila rosita de arriba -->
-      </tr>
-    </ng-template>
-  </p-table>
+          <td class="info-cells">{{ task.id }}. {{ task.description }}</td>
+          <td class="info-cells">{{ task.deadline }}</td>
+          <td class="info-cells">
+            <p-inputIcon
+              styleClass="pi pi-pencil"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              class="mr-4 cursor-pointer hover:text-yellow-500"
+              (click)="this.goToModifyTask(task)"
+            />
+            <p-inputIcon
+              styleClass="pi pi-trash"
+              pTooltip="Borrar"
+              tooltipPosition="top"
+              class="cursor-pointer hover:text-red-600"
+              (click)="deleteTask(task.id)"
+            />
+          </td>
+
+          <!-- Crear td con iconos de editar y borrar aqui (cada icono llama a una funcion del TS. Crear en el TS la funcion editar) -->
+          <!-- Crear tambien el TH vacío para que cuadre la fila rosita de arriba -->
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 
   <p-paginator
     id="p-dropdown-paginator"

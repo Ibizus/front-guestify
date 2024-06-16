@@ -46,9 +46,7 @@ export class GiftsComponent{
 
   ngOnInit() {
     console.log("Incializando componente padre Gift");
-
     this.selectedWeddingId = this.storageService.getWeddingId();
-
     console.log('weddingId recuperado de storageService en el OnInit de Guests', this.selectedWeddingId)
 
     if(this.selectedWeddingId>=0){

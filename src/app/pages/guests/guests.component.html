@@ -4,15 +4,14 @@
     <h4 class="text-2xl font-semibold mx-2">Invitados</h4>
     <div class="flex justify-end">
 
-      <!-- <p-inputIcon
-        styleClass="pi pi-plus"
-        class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-      /> -->
+      <!-- Modal Form Component -->
       <app-form-guest
+      class="inline-flex"
       [goToModify]="callModal"
       (tellParentChangesWereMade)="acceptChanges()">
       </app-form-guest>
 
+      <!-- Search Bar -->
       <p-iconField iconPosition="right" class="mr-0">
         <p-inputIcon styleClass="pi pi-search" />
         <input

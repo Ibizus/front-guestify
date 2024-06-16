@@ -2,13 +2,10 @@
   <div class="header-t">
     <h4 class="text-2xl font-semibold mx-2">Regalos</h4>
     <div class="flex justify-end">
-      
-      <!-- <p-inputIcon
-        styleClass="pi pi-plus"
-        class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-      /> -->
+
+      <!-- Modal Form Component -->
       <app-form-gift
-      class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+      class="inline-flex"
       [goToModify]="callModal"
       (tellParentChangesWereMade)="acceptChanges()">
       </app-form-gift>
@@ -72,6 +69,7 @@
       </ng-template>
     </p-table>
   </div>
+
   <p-paginator
     id="p-dropdown-paginator"
     (onPageChange)="paginate($event)"

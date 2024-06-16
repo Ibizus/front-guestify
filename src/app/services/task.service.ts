@@ -47,7 +47,10 @@ export class TaskService {
     );
   }
 
-  createTask(task: Task): Observable<Object> {
-    return this.http.post(environment.API_ENDPOINT + 'tasks/', task);
+  createTask(weddingId: number, task: Task): Observable<Object> {
+    console.log("Mandada tarea desde el create del servicio de front");
+    return this.http.post(environment.API_ENDPOINT + 'tasks/' +
+    '?id=' + weddingId,
+    task);
   }
 }

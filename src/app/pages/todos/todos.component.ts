@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Task } from '../../utils/types';
 import { TaskService } from '../../services/task.service';
 import { ToastModule } from 'primeng/toast'
@@ -7,7 +7,8 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormTodoComponent } from '../../modal/form-todo/form-todo.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
@@ -27,14 +28,15 @@ import { StorageService } from '../../services/storage.service';
         CheckboxModule,
         ReactiveFormsModule,
         ToastModule,
-        TooltipModule
+        TooltipModule,
+        FormTodoComponent
     ],
     providers: [ToastService, MessageService]
 })
 export class TodosComponent {
 
   formGroup: FormGroup | undefined;
-
+  callModal: EventEmitter<null> = new EventEmitter();
   private router: Router = new Router();
   selectedWeddingId!: number;
   tasksList !: Task[];
@@ -54,13 +56,22 @@ export class TodosComponent {
   ){}
 
   ngOnInit() {
+    console.log("Incializando componente padre ToDos");
     this.selectedWeddingId = this.storageService.getWeddingId();
+    console.log('weddingId recuperado de storageService en el OnInit de Guests', this.selectedWeddingId)
 
     if(this.selectedWeddingId>=0){
+      console.log('Recuperando tareas del backend:');
       this.getTasks(this.selectedWeddingId, this.demandedPage, this.rows, '')
     }else{
       this.router.navigate(['/dashboard']);
     }
+  }
+
+  goToModifyTask(task: Task) {
+    this.storageService.saveItemForChanges(task);
+    this.callModal.emit();
+    console.log("Emitiendo evento para editar to-do ", task);
   }
 
   paginate(event: any) {
@@ -75,6 +86,11 @@ export class TodosComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.filter = filterValue;
     this.getTasks(this.selectedWeddingId, 0, this.rows, this.filter);
+  }
+
+  acceptChanges(){
+    console.log("Recibiendo evento de hijo y recarganbdo tabla de tareas del backend");
+    this.ngOnInit();
   }
 
   getTasks(id: number, page: number, size: number, filter: string) {
@@ -97,28 +113,21 @@ export class TodosComponent {
       });
   }
 
-  sleep(ms: number | undefined) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   deleteTask(id: number) {
+    console.log('Eliminando tarea con id: ', id);
     this.taskService.deleteTask(id).subscribe({
-      next: (data) => {
+      next: () => {
         this.ngOnInit;
-        this.sleep(1000).then(() => {
-          this.toastService.success('Tarea eliminada');
-        });
+        // this.sleep(1000).then(() => {
+        //   this.toastService.success('Tarea eliminada');
+        // });
       },
       error: (error) => {
-        this.toastService.error(error);
+        // this.toastService.error(error);
       },
     });
   }
 
-  toggleModal() {
-    const modal = document.getElementById('crud-modal');
-    modal?.classList.toggle('hidden');
-    modal?.classList.toggle('flex');
-  }
 
 }
+
