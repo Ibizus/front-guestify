@@ -28,7 +28,6 @@ export const routes: Routes = [
     {path: "about", component: AboutComponent},
     {path: "faq", component: FaqComponent},
     {path: "contact", component: ContactComponent},
-    {path: "guests", component: GuestsComponent},
     {path: "invitation/:id", component: InvitationComponent},
     {path: "notfound", component: NotfoundComponent},    
     {path: "newevent", component: NeweventComponent},    

@@ -3,7 +3,12 @@
     <h4 class="text-2xl font-semibold mx-2">Regalos</h4>
     <div class="flex justify-end">
       
+      <!-- <p-inputIcon
+        styleClass="pi pi-plus"
+        class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+      /> -->
       <app-form-gift
+      class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
       [goToModify]="callModal"
       (tellParentChangesWereMade)="acceptChanges()">
       </app-form-gift>
@@ -78,7 +83,3 @@
   ></p-paginator>
 </div>
 
-        <!-- <p-inputIcon
-          styleClass="pi pi-plus"
-          class="ontent-cecnter mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-        /> -->

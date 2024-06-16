@@ -128,8 +128,9 @@ export class FormGiftComponent {
         }
       })
     }
-    console.log("Abriendo modal en onSubmit");
-    this.toggleModal();
+    console.log("Cerrando modal en onSubmit");
+    this.clearFormFields();
+    // this.toggleModal();
   }
 }
 

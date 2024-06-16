@@ -83,7 +83,7 @@ export class FormGuestComponent {
     this.formInvitation.allergies = '';
     console.log("Abriendo modal en clearFormFields");
     this.toggleModal();
-    this.router.navigate(['/guests']);
+    this.router.navigate(['dashboard/guests']);
   }
 
   acceptChanges() {
@@ -123,11 +123,10 @@ export class FormGuestComponent {
         }
       })
     }
-    console.log("Abriendo modal en onSubmit");
-    this.toggleModal();
+    console.log("Cerrando modal en onSubmit");
+    this.clearFormFields();
+    // this.toggleModal();
   }
-
-
 }
 
 function sleep(ms: number | undefined) {

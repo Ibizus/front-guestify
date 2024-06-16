@@ -9,9 +9,10 @@
   Toggle modal
 </button> -->
 
+<!-- class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary" -->
+
 <p-inputIcon
   styleClass="pi pi-plus"
-  class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
   (click)="toggleModal()"
 ></p-inputIcon>
 
@@ -36,8 +37,9 @@
           type="button"
           class="text-gray-400 bg-transparent hover:bg-primary-600 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
           data-modal-toggle="crud-modal"
-          (click)="toggleModal()"
+          (click)="clearFormFields()"
         >
+        <!-- (click)="toggleModal()" -->
           <span class="sr-only">Cerrar</span>
         </button>
       </div>
@@ -50,12 +52,12 @@
             >
             <input
               type="text"
-              name="name"
-              id="name"
+              name="giftName"
+              id="giftName"
               class="bg-secondary text-white p-2 w-full rounded-md placeholder:text-white"
-              placeholder="(formGift.name)? {{formGift.name}} : Escribe el nombre del regalo"
+              [placeholder]="formGift.name ? formGift.name : 'Escribe el nombre del regalo'"
               [(ngModel)]="formGift.name"
-              required="true"
+              required
               minlength="4"
             />
           </div>

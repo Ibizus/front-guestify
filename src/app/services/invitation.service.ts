@@ -53,6 +53,9 @@ export class InvitationService {
   }
 
   modifyInvitation(invitation: Invitation): Observable<Object> {
+
+    console.log('Enviando peticion http PUT para editar invitation: ');
+
     return this.http.put(
       environment.API_ENDPOINT + 'invitations/' + invitation.id,
       invitation
