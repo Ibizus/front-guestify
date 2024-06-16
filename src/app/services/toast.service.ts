@@ -10,8 +10,9 @@ export class ToastService {
   warn(message: string) {
     this.messageService.add({
       key: 'bc',
+      life: 3000,
       severity: 'warn',
-      summary: 'Warn',
+      summary: 'Aviso',
       detail: message,
     });
   }
@@ -19,6 +20,7 @@ export class ToastService {
   error(message: string) {
     this.messageService.add({
       key: 'bc',
+      life: 3000,
       severity: 'error',
       summary: 'Error',
       detail: message,
@@ -29,8 +31,9 @@ export class ToastService {
     console.log(message);
     this.messageService.add({
       key: 'bc',
+      life: 3000,
       severity: 'success',
-      summary: 'Success',
+      summary: 'Hecho!',
       detail: message,
     });
   }
@@ -38,6 +41,7 @@ export class ToastService {
   info(message: string) {
     this.messageService.add({
       key: 'bc',
+      life: 3000,
       severity: 'info',
       summary: 'Info',
       detail: message,

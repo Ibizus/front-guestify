@@ -9,6 +9,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 import { FormGiftComponent } from "../../modal/form-gift/form-gift.component";
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-gifts',
@@ -21,8 +24,10 @@ import { FormGiftComponent } from "../../modal/form-gift/form-gift.component";
         IconFieldModule,
         InputIconModule,
         TooltipModule,
-        FormGiftComponent
-    ]
+        FormGiftComponent,
+        ToastModule
+    ],
+    providers: [MessageService, ToastService]
 })
 export class GiftsComponent{
 
@@ -41,7 +46,8 @@ export class GiftsComponent{
 
   constructor(
     private storageService: StorageService,
-      private giftService: GiftService
+      private giftService: GiftService,
+      private toastService: ToastService
   ){}
 
   ngOnInit() {
@@ -103,13 +109,20 @@ export class GiftsComponent{
     this.giftService.deleteGift(id).subscribe({
       next: () => {
         this.ngOnInit();
+        sleep(250).then(() => {
+          this.toastService.success('Regalo eliminado con éxito');
+        });
       },
       error: (error) => {
-        // this.toastService.error(error);
+        this.toastService.error(error);
       },
     });
   }
 
 
+}
+
+function sleep(ms: number | undefined) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
