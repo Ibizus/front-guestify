@@ -5,12 +5,14 @@ import { NavigationStart, Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { Gift } from '../../utils/types';
 import { GiftService } from '../../services/gift.service';
-import { ToastService } from '../../services/toast.service';
 import { Subscription } from 'rxjs';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-form-gift',
@@ -22,7 +24,12 @@ import { DialogModule } from 'primeng/dialog';
     InputIconModule,
     TooltipModule,
     CommonModule,
-    DialogModule
+    DialogModule,
+    ToastModule
+  ],
+  providers: [
+    MessageService, 
+    ToastService
   ],
   templateUrl: './form-gift.component.html',
   styleUrl: './form-gift.component.scss'
@@ -40,7 +47,7 @@ export class FormGiftComponent {
     private router: Router,
     private storageService: StorageService,
     private giftService: GiftService,
-    //private toastService: ToastService
+    private toastService: ToastService
   ){
     this.storageService.currentItem.subscribe((gift: Gift | null)=> {
       console.log("El regalo recibido del service es: ", gift);
@@ -78,9 +85,6 @@ export class FormGiftComponent {
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;
-    // const modal = document.getElementById('crud-modal');
-    // modal?.classList.toggle('hidden');
-    // modal?.classList.toggle('flex');
   }
 
   clearFormFields() {
@@ -103,30 +107,30 @@ export class FormGiftComponent {
       this.giftService.modifyGift(this.formGift).subscribe({
         next: ()=>{
           console.log("Gift modified by this: ", this.formGift);
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.temporalGift?.name +
-          //     ' ha sido modificado correctamente!'
-          // );
+          this.toastService.success(
+            'El regalo ' +
+              this.temporalGift?.name +
+              ' ha sido modificado correctamente!'
+          );
           this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
-          // this.toastService.error(error);
+          this.toastService.error(error);
         }
       })
     }else{
       let selectedWeddingId = this.storageService.getWeddingId();
       this.giftService.createGift(selectedWeddingId, this.formGift).subscribe({
         next: ()=>{
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.formGift?.name +
-          //     ' se ha creado correctamente!'
-          // );
+          this.toastService.success(
+            'El regalo ' +
+              this.formGift?.name +
+              ' se ha creado correctamente!'
+          );
           this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
-        //   this.toastService.error(error);
+          this.toastService.error(error);
         }
       })
     }

@@ -27,7 +27,10 @@ import { MessageService } from 'primeng/api';
         FormGiftComponent,
         ToastModule
     ],
-    providers: [MessageService, ToastService]
+    providers: [
+      MessageService, 
+      ToastService
+    ]
 })
 export class GiftsComponent{
 
