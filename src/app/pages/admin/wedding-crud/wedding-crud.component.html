@@ -1,90 +1,101 @@
-<div class="card w-full mt-24 rounded-md">
-    <div class="header-t">
-      <h4 class="text-2xl font-semibold mx-2">Gestión de eventos</h4>
+<div class="mt-8 rounded-md w-full">
+  <div class="header-t">
+    <h4 class="text-2xl font-semibold mx-2">Gestiona tus eventos</h4>
+    <div class="flex justify-end">
 
-      <div class="flex justify-end">
-        <p-inputIcon
-          styleClass="pi pi-plus"
-          class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+      <!-- Modal Form Component -->
+
+      <p-inputIcon
+pTooltip="Crear usuario"
+tooltipPosition="top"
+  styleClass="pi pi-plus"
+  class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+></p-inputIcon>
+
+
+      <p-iconField iconPosition="right" class="mr-0">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          (input)="onInputChange($event)"
+          placeholder="Search"
         />
-        <p-iconField iconPosition="right" class="mr-0">
-          <p-inputIcon styleClass="pi pi-search" />
-          <input
-            pInputText
-            type="text"
-            (input)="onInputChange($event)"
-            placeholder="Buscar"
-          />
-        </p-iconField>
-      </div>
+      </p-iconField>
     </div>
-  
-    <div class="w-full rounded-md">
-      <p-table
-        [value]="weddingList"
-        styleClass="p-datatable-sm p-datatable-striped"
-        sortMode="multiple"
-      >
-        <ng-template pTemplate="header" class="table-header">
-          <tr>
-            <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Nombre<p-sortIcon field="name" />
-              </div>
-            </th>
-            <th pSortableColumn="partner1" class="header-cell each-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Pareja 1<p-sortIcon field="partner" />
-              </div>
-            </th>
-            <th pSortableColumn="partner2" class="header-cell each-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Pareja 2<p-sortIcon field="partner" />
-              </div>
-            </th>
-            <th pSortableColumn="date" class="header-cell each-cell last-h-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Fecha
-              </div>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-wedding>
-          <tr class="info-row">
-            <td class="info-cells">{{ wedding.name }}</td>
-            <td class="info-cells">{{ wedding.partner1Name }}</td>
-            <td class="info-cells">{{ wedding.partner2Name }}</td>
-            <td class="info-cells">{{ wedding.date }}</td>
-            <td class="info-cells flex">
-              <p-inputIcon
-                styleClass="pi pi-pencil"
-                pTooltip="Editar"
-                tooltipPosition="top"
-                class="mr-4 cursor-pointer hover:text-yellow-500"
-                (click)="this.goToModifyWedding(wedding)"
-              />
-              <p-inputIcon
-                styleClass="pi pi-trash"
-                pTooltip="Borrar"
-                tooltipPosition="top"
-                class="cursor-pointer hover:text-red-600"
-                (click)="this.deleteWedding(wedding.id)"
-              />
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-
-    <p-paginator
-      id="p-dropdown-paginator"
-      (onPageChange)="paginate($event)"
-      [first]="first"
-      [rows]="rows"
-      [showCurrentPageReport]="true"
-      [totalRecords]="totalRecords"
-      [rowsPerPageOptions]="[5, 10, 20]"
-    ></p-paginator>
   </div>
 
-  <p-toast position="bottom-center" key="bc"></p-toast>
+  <div class="rounded-md">
+    <p-table
+      [value]="weddingList"
+      styleClass="p-datatable-sm p-datatable-striped"
+      sortMode="multiple"
+    >
+             <ng-template pTemplate="header" class="table-header">
+        <tr>
+          <th pSortableColumn="name" class="header-cell each-cell first-h-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Nombre<p-sortIcon field="name" />
+            </div>
+          </th>
+          <th pSortableColumn="partner1" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Pareja 1<p-sortIcon field="partner" />
+            </div>
+          </th>
+          <th pSortableColumn="partner2" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Pareja 2<p-sortIcon field="partner" />
+            </div>
+          </th>
+          <th pSortableColumn="date" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Fecha
+            </div>
+          </th>
+          <th pSortableColumn="date" class="header-cell each-cell last-h-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-wedding>
+        <tr class="info-row">
+          <td class="info-cells">{{ wedding.name }}</td>
+          <td class="info-cells">{{ wedding.partner1Name }}</td>
+          <td class="info-cells">{{ wedding.partner2Name }}</td>
+          <td class="info-cells">{{ wedding.date }}</td>
+          <td class="info-cells flex">
+            <p-inputIcon
+              styleClass="pi pi-pencil"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              class="mr-4 cursor-pointer hover:text-yellow-500"
+              (click)="this.goToModifyWedding(wedding)"
+            />
+            <p-inputIcon
+              styleClass="pi pi-trash"
+              pTooltip="Borrar"
+              tooltipPosition="top"
+              class="cursor-pointer hover:text-red-600"
+              (click)="this.deleteWedding(wedding.id)"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-paginator
+    id="p-dropdown-paginator"
+    (onPageChange)="paginate($event)"
+    [first]="first"
+    [rows]="rows"
+    [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  ></p-paginator>
+</div>
+
+<p-toast position="bottom-center" key="bc"></p-toast>
