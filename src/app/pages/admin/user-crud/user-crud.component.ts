@@ -30,7 +30,6 @@ import { MessageService } from 'primeng/api';
 })
 export class UserCrudComponent {
 
-  // construct
   userList!: any[]
   // Pagination variables with default values:
   first: number = 0;

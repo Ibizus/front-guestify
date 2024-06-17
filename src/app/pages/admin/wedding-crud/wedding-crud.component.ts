@@ -6,6 +6,9 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { Wedding } from '../../../utils/types';
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../../services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-wedding-crud',
@@ -15,14 +18,19 @@ import { Wedding } from '../../../utils/types';
     PaginatorModule,
     IconFieldModule,
     InputIconModule,
-    TooltipModule
+    TooltipModule,
+    ToastModule
+  ],
+  providers: [
+    MessageService, 
+    ToastService
   ],
   templateUrl: './wedding-crud.component.html',
   styleUrl: './wedding-crud.component.scss'
 })
 export class WeddingCrudComponent {
 
-  weddingList!: Wedding[]
+  weddingList!: any[]
     // Pagination variables with default values:
     first: number = 0;
     rows: number = 10;
@@ -33,11 +41,14 @@ export class WeddingCrudComponent {
     filter: string = '';
 
   constructor(
-    private weddingService: WeddingService) {
-  }
+    private weddingService: WeddingService,
+    private toastService: ToastService) {
+    }
+  
 
   ngOnInit(): void {
-    this.weddingService.getWeddings(this.demandedPage, this.rows, '');
+    console.log("Incializando componente Wedding Crud");
+    this.getWeddings(this.demandedPage, this.rows, '');
   }
 
   paginate(event: any) {
@@ -69,5 +80,27 @@ export class WeddingCrudComponent {
     this.filter = filterValue;
     this.getWeddings(0, this.rows, this.filter);
   }
+  
+  deleteWedding(id: number) {
+    console.log('Eliminanda boda con id: ', id);
+    this.weddingService.deleteWedding(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+        sleep(500).then(() => {
+          this.toastService.success('Boda eliminada con éxito');
+        });
+      },
+      error: (error) => {
+        this.toastService.error(error);
+      },
+    });
+  }
 
+  goToModifyWedding(_t38: any) {
+    throw new Error('Method not implemented.');
+  }
+}
+
+function sleep(ms: number | undefined) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -37,7 +37,7 @@ export class WeddingService {
 
   deleteWedding(id: number): Observable<Wedding> {
     return this.http.delete<Wedding>(
-      environment.API_ENDPOINT + 'Weddings/' + id
+      environment.API_ENDPOINT + 'weddings/' + id
     );
   }
 
