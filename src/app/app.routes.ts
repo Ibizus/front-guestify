@@ -19,6 +19,7 @@ import { NeweventComponent } from './main/newevent/newevent.component';
 import { BenefitsComponent } from './main/benefits/benefits.component';
 import { UserCrudComponent } from './pages/admin/user-crud/user-crud.component';
 import { WeddingCrudComponent } from './pages/admin/wedding-crud/wedding-crud.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     {path: "home", component: LandingComponent},
@@ -33,6 +34,7 @@ export const routes: Routes = [
     {path: "newevent", component: NeweventComponent},    
     {path: "users", component: UserCrudComponent},
     {path: "weddings", component: WeddingCrudComponent},
+    {path: "profile", component: ProfileComponent},
     {
         path: "dashboard", 
         component: DashboardComponent,

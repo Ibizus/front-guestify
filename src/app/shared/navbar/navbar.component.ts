@@ -12,6 +12,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+
+  user: any;
   userId!: number;
   isMenuOpen = false;
   loggedIn = false;
@@ -23,14 +25,17 @@ export class NavbarComponent {
   ) {}
 
   ngOnInit() {
-    this.userId = this.storageService.getUser().id;
+    this.user = this.storageService.getUser();
+
+    this.userId = this.user.id;
     console.log('user id recuperado de storageService', this.userId);
     if (!!this.userId) {
       this.loggedIn = true;
     }
 
     this.userRol = this.storageService.getUser().rol;
-    if (this.userRol == 'ROL_ADMIN') {
+    this.userRol = this.user.roles;
+    if (this.userRol.includes('ROL_ADMIN')) {
       this.adminLoggedIn = true;
     }
   }
