@@ -112,7 +112,7 @@ export class GiftsComponent{
     this.giftService.deleteGift(id).subscribe({
       next: () => {
         this.ngOnInit();
-        sleep(250).then(() => {
+        sleep(500).then(() => {
           this.toastService.success('Regalo eliminado con éxito');
         });
       },

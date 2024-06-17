@@ -107,12 +107,14 @@ export class FormGiftComponent {
       this.giftService.modifyGift(this.formGift).subscribe({
         next: ()=>{
           console.log("Gift modified by this: ", this.formGift);
-          this.toastService.success(
-            'El regalo ' +
-              this.temporalGift?.name +
-              ' ha sido modificado correctamente!'
-          );
           this.tellParentChangesWereMade.emit();
+          sleep(500).then(() => {
+            this.toastService.success(
+              'El regalo ' +
+              this.temporalGift.name +
+              ' ha sido modificado correctamente!'
+            );
+          });
         },
         error: (error) =>{
           this.toastService.error(error);
@@ -122,12 +124,14 @@ export class FormGiftComponent {
       let selectedWeddingId = this.storageService.getWeddingId();
       this.giftService.createGift(selectedWeddingId, this.formGift).subscribe({
         next: ()=>{
-          this.toastService.success(
-            'El regalo ' +
-              this.formGift?.name +
-              ' se ha creado correctamente!'
-          );
           this.tellParentChangesWereMade.emit();
+          sleep(500).then(() => {
+            this.toastService.success(
+              'El regalo ' +
+                this.formGift.name +
+                ' se ha creado correctamente!'
+            );
+          });
         },
         error: (error) =>{
           this.toastService.error(error);
