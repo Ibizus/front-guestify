@@ -55,4 +55,12 @@ export class StorageService {
     }
     return false;
   }
+
+  public adminIsLoggedIn(): boolean {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user!=null && user.includes('ROL_ADMIN')) {
+      return true;
+    }
+    return false;
+  }
 }

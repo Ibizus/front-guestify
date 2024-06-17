@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   };
   isLoggedIn = false;
   isLoginFailed = false;
+  adminIsLoggedIn = false;
   errorMessage = '';
   roles: string[] = [];
 
@@ -34,7 +35,10 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
+    if(this.storageService.adminIsLoggedIn()){
+      this.adminIsLoggedIn = true;
+      this.router.navigateByUrl('users').then(() => {console.log('Ya logueado, cargando admin.')});
+    } else if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
       this.router.navigateByUrl('dashboard').then(() => {console.log('Ya logueado, cargando dashboard.')});
@@ -55,7 +59,6 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         console.log('isLoggedIn = '+ this.isLoggedIn);
         this.roles = this.storageService.getUser().roles;
-
 
         this.reloadPage();
         // this.router.navigate(['index']).then(
