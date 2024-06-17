@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if(this.storageService.adminIsLoggedIn()){
       this.adminIsLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
       this.router.navigateByUrl('users').then(() => {console.log('Ya logueado, cargando admin.')});
     } else if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;

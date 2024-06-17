@@ -1,90 +1,101 @@
-<div class="card w-full mt-24 rounded-md">
-    <div class="header-t">
-      <h4 class="text-2xl font-semibold mx-2">Gestión de usuarios</h4>
-      
-      <div class="flex justify-end">
-        <p-inputIcon
-          styleClass="pi pi-plus"
-          class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
-        />
-        <p-iconField iconPosition="right" class="mr-0">
-          <p-inputIcon styleClass="pi pi-search" />
-          <input
-            pInputText
-            type="text"
-            (input)="onInputChange($event)"
-            placeholder="Buscar"
-          />
-        </p-iconField>
-      </div>
-    </div>
-  
-    <div class="w-full rounded-md">
-      <p-table
-        [value]="userList"
-        styleClass="p-datatable-sm p-datatable-striped"
-        sortMode="multiple"
-      >
-        <ng-template pTemplate="header" class="table-header">
-          <tr>
-            <th pSortableColumn="id" class="header-cell each-cell first-h-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Id<p-sortIcon field="id" />
-              </div>
-            </th>
-            <th pSortableColumn="name" class="header-cell each-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Nombre<p-sortIcon field="name" />
-              </div>
-            </th>
-            <th pSortableColumn="apellido" class="header-cell each-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Apellido<p-sortIcon field="apellido" />
-              </div>
-            </th>
-            <th pSortableColumn="Email" class="header-cell each-cell last-h-cell">
-              <div class="header-content flex items-center md:mx-4 xs:mx-2">
-                Email
-              </div>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-          <tr class="info-row">
-            <td class="info-cells">{{ user.id }}</td>
-            <td class="info-cells">{{ user.name }}</td>
-            <td class="info-cells">{{ user.surname }}</td>
-            <td class="info-cells">{{ user.email }}</td>
-            <td class="info-cells flex">
-              <p-inputIcon
-                styleClass="pi pi-pencil"
-                pTooltip="Editar"
-                tooltipPosition="top"
-                class="mr-4 cursor-pointer hover:text-yellow-500"
-                (click)="this.goToModifyUser(user)"
-              />
-              <p-inputIcon
-                styleClass="pi pi-trash"
-                pTooltip="Borrar"
-                tooltipPosition="top"
-                class="cursor-pointer hover:text-red-600"
-                (click)="this.deleteUser(user.id)"
-              />
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
+<div class="mt-4 rounded-md w-full">
+  <div class="header-t">
+    <h4 class="text-2xl font-semibold mx-2">Gestiona a tus usuarios</h4>
+    <div class="flex justify-end">
 
-    <p-paginator
-      id="p-dropdown-paginator"
-      (onPageChange)="paginate($event)"
-      [first]="first"
-      [rows]="rows"
-      [showCurrentPageReport]="true"
-      [totalRecords]="totalRecords"
-      [rowsPerPageOptions]="[5, 10, 20]"
-    ></p-paginator>
+      <!-- Modal Form Component -->
+
+      <p-inputIcon
+pTooltip="Crear usuario"
+tooltipPosition="top"
+  styleClass="pi pi-plus"
+  class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+></p-inputIcon>
+
+
+      <p-iconField iconPosition="right" class="mr-0">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          (input)="onInputChange($event)"
+          placeholder="Search"
+        />
+      </p-iconField>
+    </div>
   </div>
 
-  <p-toast position="bottom-center" key="bc"></p-toast>
+  <div class="rounded-md">
+    <p-table
+      [value]="userList"
+      styleClass="p-datatable-sm p-datatable-striped"
+      sortMode="multiple"
+    >
+      <ng-template pTemplate="header" class="table-header">
+        <tr>
+          <th pSortableColumn="id" class="header-cell each-cell first-h-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Id<p-sortIcon field="id" />
+            </div>
+          </th>
+          <th pSortableColumn="name" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Nombre<p-sortIcon field="name" />
+            </div>
+          </th>
+          <th pSortableColumn="apellido" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Apellido<p-sortIcon field="apellido" />
+            </div>
+          </th>
+          <th pSortableColumn="Email" class="header-cell each-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              Email
+            </div>
+          </th>
+          <th pSortableColumn="Email" class="header-cell each-cell last-h-cell">
+            <div class="header-content flex items-center md:mx-4 xs:mx-2">
+              
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr class="info-row">
+          <td class="info-cells">{{ user.id }}</td>
+          <td class="info-cells">{{ user.name }}</td>
+          <td class="info-cells">{{ user.surname }}</td>
+          <td class="info-cells">{{ user.email }}</td>
+          <td class="info-cells flex">
+            <p-inputIcon
+              styleClass="pi pi-pencil"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              class="mr-4 cursor-pointer hover:text-yellow-500"
+              (click)="this.goToModifyUser(user)"
+            />
+            <p-inputIcon
+              styleClass="pi pi-trash"
+              pTooltip="Borrar"
+              tooltipPosition="top"
+              class="cursor-pointer hover:text-red-600"
+              (click)="this.deleteUser(user.id)"
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-paginator
+    id="p-dropdown-paginator"
+    (onPageChange)="paginate($event)"
+    [first]="first"
+    [rows]="rows"
+    [showCurrentPageReport]="true"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  ></p-paginator>
+</div>
+
+<p-toast position="bottom-center" key="bc"></p-toast>
