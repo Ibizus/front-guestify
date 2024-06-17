@@ -6,6 +6,9 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { User } from '../../../utils/types';
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../../services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-crud',
@@ -15,7 +18,12 @@ import { User } from '../../../utils/types';
     PaginatorModule,
     IconFieldModule,
     InputIconModule,
-    TooltipModule
+    TooltipModule,
+    ToastModule
+  ],
+  providers: [
+    MessageService, 
+    ToastService
   ],
   templateUrl: './user-crud.component.html',
   styleUrl: './user-crud.component.scss'
@@ -23,7 +31,7 @@ import { User } from '../../../utils/types';
 export class UserCrudComponent {
 
   // construct
-  userList!: User[]
+  userList!: any[]
   // Pagination variables with default values:
   first: number = 0;
   rows: number = 10;
@@ -34,11 +42,13 @@ export class UserCrudComponent {
   filter: string = '';
 
   constructor(
-    private userService: UserService) {
+    private userService: UserService,
+    private toastService: ToastService) {
   }
 
   ngOnInit(): void {
-    this.userService.getUsers(this.demandedPage, this.rows, '');
+    console.log("Incializando componente Users Crud");
+    this.getUsers(this.demandedPage, this.rows, '');
   }
 
   paginate(event: any) {
@@ -51,9 +61,12 @@ export class UserCrudComponent {
   getUsers( page: number, size: number, filter: string) {
     this.userService.getUsers(page, size, filter).subscribe({
       next: (data) => {
-        this.userList = data.users;
         // CHECK DATA:
+        console.log('Data de los usuarios recibida del backend: ');
         console.log(data);
+
+        this.userList = data.users;
+
         // Pagination:
         this.first = page * size + 1; // Calculate index of first item shown
         this.rows = size; // Update size input from the request
@@ -70,4 +83,28 @@ export class UserCrudComponent {
     this.filter = filterValue;
     this.getUsers(0, this.rows, this.filter);
   }
+
+  deleteUser(id: number) {
+    console.log('Eliminando usuario con id: ', id);
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+        sleep(500).then(() => {
+          this.toastService.success('Usuario eliminado con éxito');
+        });
+      },
+      error: (error) => {
+        this.toastService.error(error);
+      },
+    });
+  }
+
+
+  goToModifyUser(_t38: any) {
+    throw new Error('Method not implemented.');
+  }
+}
+
+function sleep(ms: number | undefined) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
