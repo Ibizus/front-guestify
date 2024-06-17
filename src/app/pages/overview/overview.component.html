@@ -1,5 +1,29 @@
 <main class="flex flex-col w-full mt-5 gap-2">
 
+  <!-- Header of the table with name, new-form component and search bar -->
+  <div class="header-t">
+    <h4 class="text-2xl font-semibold mx-2">Mis eventos</h4>
+    <div class="flex justify-end">
+
+    <p-inputIcon
+    styleClass="pi pi-plus"
+    class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
+    ></p-inputIcon>
+
+      <p-iconField iconPosition="right" class="mr-0">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          (input)="onInputChange($event)"
+          placeholder="Search"
+        />
+      </p-iconField>
+    </div>
+  </div>
+
+
+
   @for (wedding of userWeddings; track wedding.id) {
 
     <button

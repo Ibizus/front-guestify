@@ -4,11 +4,17 @@ import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 // import { Wedding } from '../../utils/types';
 import { StorageService } from '../../services/storage.service';
+import { IconFieldModule } from 'primeng/iconfield';
+
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [NgClass],
+  imports: [
+    NgClass,
+    InputIconModule,
+    IconFieldModule
+  ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'
 })
@@ -29,4 +35,10 @@ export class OverviewComponent {
     this.router.navigate(['/dashboard/guests']);
   }
 
-}
+  // Method to implement search bar
+  onInputChange($event: Event) {
+    throw new Error('Method not implemented.');
+  }
+
+}import { InputIconModule } from 'primeng/inputicon';
+
