@@ -1,11 +1,13 @@
 <!-- Button -->
 <p-inputIcon
+pTooltip="Crear regalo"
+tooltipPosition="top"
   styleClass="pi pi-plus"
   class="content-center mr-2 rounded-md py-1 px-2 cursor-pointer text-white hover:text-black bg-secondary"
   (click)="toggleModal()"
 ></p-inputIcon>
 
-<!--ESTE ES EL MODAL PTOAST QUE HAY QUE DUPLICAR EN OTROS SITIOS -->
+<!--ESTE ES EL MODAL P-DIALOG QUE HAY QUE DUPLICAR EN OTROS SITIOS -->
 <div class="card flex flex-column align-items-center gap-2">
   <p-dialog 
       header="Crea o edita tus regalos" 
@@ -52,6 +54,3 @@
 
 <!-- Toast label -->
 <p-toast position="bottom-center" key="bc"></p-toast>
-
-
-

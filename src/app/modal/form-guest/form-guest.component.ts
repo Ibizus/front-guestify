@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
-import { ToastService } from '../../services/toast.service';
 import { Subscription } from 'rxjs';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -11,6 +10,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { GuestsComponent } from '../../pages/guests/guests.component';
 import { InvitationService } from '../../services/invitation.service';
 import { Invitation } from '../../utils/types';
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../services/toast.service';
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-form-guest',
@@ -21,7 +24,9 @@ import { Invitation } from '../../utils/types';
     IconFieldModule,
     InputIconModule,
     TooltipModule,
-    CommonModule
+    CommonModule,
+    ToastModule,
+    DialogModule
   ],
   templateUrl: './form-guest.component.html',
   styleUrl: './form-guest.component.scss'
@@ -39,7 +44,7 @@ export class FormGuestComponent {
     private router: Router,
     private storageService: StorageService,
     private invitationService: InvitationService,
-    //private toastService: ToastService
+    private toastService: ToastService
   ){
     this.storageService.currentItem.subscribe((invitation: Invitation | null)=> {
       console.log("La invitacion recibida del service es: ", invitation);
@@ -96,30 +101,34 @@ export class FormGuestComponent {
       this.invitationService.modifyInvitation(this.formInvitation).subscribe({
         next: ()=>{
           console.log("Invitation modified by this: ", this.formInvitation);
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.temporalInvitation?.name +
-          //     ' ha sido modificado correctamente!'
-          // );
+          sleep(500).then(() => {
+            this.toastService.success(
+              'El invitado ' +
+              this.temporalInvitation.name +
+              ' ha sido modificado correctamente!'
+            );
+          });
           this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
-          // this.toastService.error(error);
+          this.toastService.error(error);
         }
       })
     }else{
       let selectedWeddingId = this.storageService.getWeddingId();
       this.invitationService.createInvitation(selectedWeddingId, this.formInvitation).subscribe({
         next: ()=>{
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.formInvitation?.name +
-          //     ' se ha creado correctamente!'
-          // );
+          sleep(500).then(() => {
+            this.toastService.success(
+              'El usuario ' +
+                this.formInvitation.name +
+                ' se ha creado correctamente!'
+            );
+          });
           this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
-        //   this.toastService.error(error);
+         this.toastService.error(error);
         }
       })
     }
@@ -144,4 +153,3 @@ function newInvitation(): Invitation {
     guestId: 0,
   };
 }
-

@@ -10,6 +10,9 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { Task } from '../../utils/types';
 import { TaskService } from '../../services/task.service';
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-form-todo',
@@ -20,7 +23,13 @@ import { TaskService } from '../../services/task.service';
     IconFieldModule,
     InputIconModule,
     TooltipModule,
-    CommonModule
+    CommonModule,
+    ToastModule,
+    DialogModule
+  ],
+  providers: [
+    MessageService, 
+    ToastService
   ],
   templateUrl: './form-todo.component.html',
   styleUrl: './form-todo.component.scss'
@@ -38,7 +47,7 @@ export class FormTodoComponent {
     private router: Router,
     private storageService: StorageService,
     private taskService: TaskService,
-    //private toastService: ToastService
+    private toastService: ToastService
   ){
     this.storageService.currentItem.subscribe((task: Task | null)=> {
       console.log("El regalo recibido del service es: ", task);
@@ -93,30 +102,31 @@ export class FormTodoComponent {
       this.taskService.modifyTask(this.formTask).subscribe({
         next: ()=>{
           console.log("Task modified by this: ", this.formTask);
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.temporalTask?.name +
-          //     ' ha sido modificado correctamente!'
-          // );
           this.tellParentChangesWereMade.emit();
+          sleep(500).then(() => {
+            this.toastService.success(
+              'La tarea ' +
+              this.temporalTask.description +
+              ' ha sido modificado correctamente!'
+            );
+          });
         },
         error: (error) =>{
-          // this.toastService.error(error);
+          this.toastService.error(error);
         }
       })
     }else{
       let selectedWeddingId = this.storageService.getWeddingId();
       this.taskService.createTask(selectedWeddingId, this.formTask).subscribe({
         next: ()=>{
-          // this.toastService.success(
-          //   'El regalo ' +
-          //     this.formTask?.name +
-          //     ' se ha creado correctamente!'
-          // );
           this.tellParentChangesWereMade.emit();
+          sleep(500).then(() => {
+            this.toastService.success('La tarea se ha creado correctamente!');
+          });
+          
         },
         error: (error) =>{
-        //   this.toastService.error(error);
+         this.toastService.error(error);
         }
       })
     }

@@ -9,6 +9,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 import { FormGuestComponent } from '../../modal/form-guest/form-guest.component';
+import { ToastModule } from 'primeng/toast';  
+import { ToastService } from '../../services/toast.service';
+import { MessageService } from 'primeng/api';
+import { GuestService } from '../../services/guest.service';
 
 @Component({
     selector: 'app-guests',
@@ -21,9 +25,15 @@ import { FormGuestComponent } from '../../modal/form-guest/form-guest.component'
         IconFieldModule,
         InputIconModule,
         TooltipModule,
-        FormGuestComponent
+        FormGuestComponent,
+        ToastModule
+    ],
+    providers: [
+      MessageService, 
+      ToastService
     ]
 })
+
 export class GuestsComponent{
 
   callModal: EventEmitter<null> = new EventEmitter();
@@ -41,7 +51,9 @@ export class GuestsComponent{
 
   constructor(
     private storageService: StorageService,
-    private invitationService: InvitationService
+    private invitationService: InvitationService,
+    private guestService: GuestService,
+    private toastService: ToastService
   ){}
 
   ngOnInit() {
@@ -106,11 +118,18 @@ export class GuestsComponent{
       this.invitationService.deleteInvitation(id).subscribe({
         next: () => {
           this.ngOnInit();
+          sleep(500).then(() => {
+            this.toastService.success('Usuario eliminado con éxito');
+          });
         },
         error: (error) => {
-          // this.toastService.error(error);
+          this.toastService.error(error);
         },
       });
     }
 
+  }
+
+  function sleep(ms: number | undefined) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }

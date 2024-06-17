@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 // import { Wedding } from '../../utils/types';
 import { StorageService } from '../../services/storage.service';
 import { IconFieldModule } from 'primeng/iconfield';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { IconFieldModule } from 'primeng/iconfield';
   imports: [
     NgClass,
     InputIconModule,
-    IconFieldModule
+    IconFieldModule,
+    TooltipModule,
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'
@@ -41,4 +43,3 @@ export class OverviewComponent {
   }
 
 }import { InputIconModule } from 'primeng/inputicon';
-

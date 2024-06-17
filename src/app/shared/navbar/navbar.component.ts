@@ -3,11 +3,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, TooltipModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

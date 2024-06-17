@@ -118,12 +118,12 @@ export class TodosComponent {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         this.ngOnInit;
-        // this.sleep(1000).then(() => {
-        //   this.toastService.success('Tarea eliminada');
-        // });
+        sleep(1000).then(() => {
+          this.toastService.success('Tarea eliminada');
+        });
       },
       error: (error) => {
-        // this.toastService.error(error);
+        this.toastService.error(error);
       },
     });
   }
@@ -131,3 +131,6 @@ export class TodosComponent {
 
 }
 
+function sleep(ms: number | undefined) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
