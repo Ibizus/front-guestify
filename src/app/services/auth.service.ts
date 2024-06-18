@@ -9,9 +9,11 @@ import {Observable, throwError} from "rxjs";
 })
 export class AuthService {
 
-  private apiAuthURL = "http://localhost:8080/api/auth/";
+  private apiAuthURL = "https://api-rest-iarw.onrender.com/api/auth/";
   // RENDER  PUBLICURL:
-  // https://api-rest-iarw.onrender.com/v1/api/
+  // "https://api-rest-iarw.onrender.com/api/auth/"
+  // LOCALHOST:
+  // "http://localhost:8080/api/auth/"
 
   httpOptions = {
     headers: new HttpHeaders({
