@@ -7,7 +7,7 @@ interface User {
     surname2: string;
     address: string;
     address2: string;
-    postalCode: string;
+    postalcode: string;
     city: string;
     region: string;
     idNumber: string;
@@ -73,11 +73,11 @@ interface Wedding {
     name: string;
     date: Date;
     time: Time;
-    partner1Name: string;
-    partner2Name: string;
+    partner1name: string;
+    partner2name: string;
     address: string;
     address2: string;
-    postalCode: string;
+    postalcode: string;
     city: string;
     region: string;
     events: WedEvent[];
