@@ -108,7 +108,6 @@ export class TodosComponent {
         },
         error: (error) => {
           console.error(error);
-          this.toastService.error(error);
         },
       });
   }
@@ -117,8 +116,8 @@ export class TodosComponent {
     console.log('Eliminando tarea con id: ', id);
     this.taskService.deleteTask(id).subscribe({
       next: () => {
-        this.ngOnInit;
-        sleep(1000).then(() => {
+        this.ngOnInit();
+        sleep(500).then(() => {
           this.toastService.success('Tarea eliminada');
         });
       },

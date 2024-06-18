@@ -17,7 +17,7 @@
           pInputText
           type="text"
           (input)="onInputChange($event)"
-          placeholder="Search"
+          placeholder="Buscar"
         />
       </p-iconField>
     </div>
@@ -85,7 +85,7 @@
             </p-cellEditor>
           </td>
 
-          <td class="info-cells">{{ task.id }}. {{ task.description }}</td>
+          <td class="info-cells">{{ task.description }}</td>
           <td class="info-cells">{{ task.deadline }}</td>
           <td class="info-cells">
             <p-inputIcon

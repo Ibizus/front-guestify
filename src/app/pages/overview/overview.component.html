@@ -6,6 +6,8 @@
     <div class="flex justify-end">
 
     <p-inputIcon
+    [routerLink]="['/newevent']" 
+    routerLinkActive="router-link-active" 
     pTooltip="Crear evento"
     tooltipPosition="left"
     styleClass="pi pi-plus"
@@ -18,7 +20,7 @@
           pInputText
           type="text"
           (input)="onInputChange($event)"
-          placeholder="Search"
+          placeholder="Buscar"
         />
       </p-iconField>
     </div>

@@ -27,10 +27,7 @@ import { MessageService } from 'primeng/api';
     DialogModule,
     ToastModule
   ],
-  providers: [
-    MessageService, 
-    ToastService
-  ],
+ 
   templateUrl: './form-gift.component.html',
   styleUrl: './form-gift.component.scss'
 })

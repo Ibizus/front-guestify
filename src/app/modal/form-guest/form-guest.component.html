@@ -21,7 +21,6 @@ tooltipPosition="top"
 
       <!-- Name -->
       <div class="flex flex-col">
-        <!-- <label class="block mb-2 text-sm font-medium">Nombre del regalo</label> -->
         <input pInputText 
         class="bg-secondary text-white p-2 w-full rounded-md placeholder:text-white"
         [placeholder]="formInvitation.name ? formInvitation.name : 'Escribe el nombre del invitado'"
@@ -29,6 +28,16 @@ tooltipPosition="top"
         type="text" 
         required 
         minlength="3"/>
+      </div>
+      <!-- Email -->
+      <div class="flex flex-col">
+        <input pInputText 
+        class="bg-secondary text-white p-2 w-full rounded-md placeholder:text-white"
+        [placeholder]="formInvitation.email ? formInvitation.email : 'Email del invitado'"
+        [(ngModel)]="formInvitation.email" 
+        type="email" 
+        required 
+        minlength="8"/>
       </div>
 
       <!-- Accept and Cancel buttons -->

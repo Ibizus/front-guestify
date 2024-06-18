@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
 // import { Wedding } from '../../utils/types';
 import { StorageService } from '../../services/storage.service';
@@ -16,6 +17,8 @@ import { TooltipModule } from 'primeng/tooltip';
     InputIconModule,
     IconFieldModule,
     TooltipModule,
+    RouterLink, 
+    RouterLinkActive
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'

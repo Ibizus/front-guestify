@@ -28,6 +28,10 @@ import { DialogModule } from 'primeng/dialog';
     ToastModule,
     DialogModule
   ],
+  providers: [
+    MessageService, 
+    ToastService
+  ],
   templateUrl: './form-guest.component.html',
   styleUrl: './form-guest.component.scss'
 })
@@ -88,7 +92,7 @@ export class FormGuestComponent {
     this.formInvitation.allergies = '';
     console.log("Abriendo modal en clearFormFields");
     this.toggleModal();
-    this.router.navigate(['dashboard/guests']);
+    this.router.navigate(['/guests']);
   }
 
   acceptChanges() {
@@ -101,6 +105,7 @@ export class FormGuestComponent {
       this.invitationService.modifyInvitation(this.formInvitation).subscribe({
         next: ()=>{
           console.log("Invitation modified by this: ", this.formInvitation);
+          this.tellParentChangesWereMade.emit();
           sleep(500).then(() => {
             this.toastService.success(
               'El invitado ' +
@@ -108,7 +113,6 @@ export class FormGuestComponent {
               ' ha sido modificado correctamente!'
             );
           });
-          this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
           this.toastService.error(error);
@@ -118,6 +122,7 @@ export class FormGuestComponent {
       let selectedWeddingId = this.storageService.getWeddingId();
       this.invitationService.createInvitation(selectedWeddingId, this.formInvitation).subscribe({
         next: ()=>{
+          this.tellParentChangesWereMade.emit();
           sleep(500).then(() => {
             this.toastService.success(
               'El usuario ' +
@@ -125,7 +130,6 @@ export class FormGuestComponent {
                 ' se ha creado correctamente!'
             );
           });
-          this.tellParentChangesWereMade.emit();
         },
         error: (error) =>{
          this.toastService.error(error);
