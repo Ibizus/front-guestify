@@ -27,16 +27,14 @@
   </div>
 
 
-
   @for (wedding of userWeddings; track wedding.id) {
 
-    <button
-      class="w-full py-4 px-8 bg-secondary hover:bg-secondary-400 transition-colors rounded-md"
-      [ngClass]="{'bg-secondary-600': wedding.id == selectedWeddingId}"
+      <button
+      class="w-full py-4 px-8 bg-secondary hover:text-white hover:bg-secondary-400 transition-colors rounded-md"
+      [ngClass]="{'bg-secondary-400': wedding.id === this.selectedWeddingId}"
       type="button"
       (click)="onSelectWedding(wedding.id)">
-      
-      <a class="flex justify-between" routerLink="/dashboard">
+      <a class="flex justify-between">
         id: {{ wedding.id }}
         <p class="text-xl font-semibold">{{ wedding.name }}</p>
         <p>{{ wedding.date }}</p>

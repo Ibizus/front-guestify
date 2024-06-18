@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -23,7 +23,7 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit{
 
   @Input() userWeddings!:any[];
   private router: Router = new Router();
@@ -32,11 +32,17 @@ export class OverviewComponent {
   constructor(
     private storageService: StorageService
   ){}
+  
+  ngOnInit(): void {
+    console.log("Incializando componente Overview");
+    this.selectedWeddingId = this.storageService.getWeddingId();
+  }
 
   onSelectWedding(id: number) {
     this.storageService.saveSelectedWedding(id);
     this.selectedWeddingId = id;
     console.log('selectedWeddingId saved: ', this.selectedWeddingId)
+    this.ngOnInit()
     this.router.navigate(['/dashboard/guests']);
   }
 
